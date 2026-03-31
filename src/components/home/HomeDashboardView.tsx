@@ -108,16 +108,16 @@ export default function HomeDashboardView({
   ];
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
-      <header className="mb-6 rounded-3xl border border-white/70 bg-card/95 p-5 shadow-soft backdrop-blur sm:mb-8">
+    <main className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8">
+      <header className="mb-5 rounded-[28px] border border-white/70 bg-card/95 p-4 shadow-soft backdrop-blur sm:mb-7 sm:p-5">
         <img
           src="/assets/logo.png"
           alt="Standard Therapeutics"
-          className="mb-3 h-12 w-12 object-contain"
+          className="mb-2 h-11 w-11 object-contain sm:mb-3 sm:h-12 sm:w-12"
         />
-        <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Standard Therapeutics</h1>
-        <p className="mt-1 text-sm text-muted">Your home to functional health</p>
-        <p className="mt-2 text-sm text-muted">
+        <h1 className="text-[30px] font-bold tracking-tight text-ink sm:text-4xl">Standard Therapeutics</h1>
+        <p className="mt-1 text-[13px] text-muted sm:text-sm">Your home to functional health</p>
+        <p className="mt-2 text-[13px] text-muted sm:text-sm">
           {userEmail
             ? `Welcome back, ${userEmail}.`
             : "Guest preview mode is active. Explore the app-style experience in your browser."}
@@ -125,44 +125,44 @@ export default function HomeDashboardView({
       </header>
 
       <section>
-        <p className="mb-3 text-sm font-semibold text-muted">Biomarker Dashboard</p>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <div className="rounded-2xl bg-[#E46A2D] p-5 text-white shadow-soft">
+        <p className="mb-2 text-[13px] font-semibold text-muted sm:mb-3 sm:text-sm">Biomarker Dashboard</p>
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
+          <div className="rounded-[20px] bg-[#E46A2D] p-4 text-white shadow-soft sm:p-5">
             <p className="text-sm text-white/80">Biological Age</p>
-            <p className="mt-1 text-5xl font-bold leading-none">23.6</p>
-            <p className="mt-2 text-sm text-white/85">2.4 years younger than your chronological age</p>
+            <p className="mt-1 text-4xl font-bold leading-none sm:text-5xl">23.6</p>
+            <p className="mt-2 text-[13px] text-white/85 sm:text-sm">2.4 years younger than your chronological age</p>
           </div>
-          <div className="rounded-2xl bg-[#14161C] p-5 text-white shadow-soft">
+          <div className="rounded-[20px] bg-[#14161C] p-4 text-white shadow-soft sm:p-5">
             <p className="text-sm text-white/80">Blood Biomarkers</p>
-            <p className="mt-1 text-5xl font-bold leading-none">60</p>
-            <p className="mt-2 text-sm text-white/85">1 Pending · 3 Out of range</p>
+            <p className="mt-1 text-4xl font-bold leading-none sm:text-5xl">60</p>
+            <p className="mt-2 text-[13px] text-white/85 sm:text-sm">1 Pending · 3 Out of range</p>
           </div>
         </div>
       </section>
 
-      <section className="mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
-        <div className="min-w-[280px] snap-start rounded-2xl bg-blue-700 p-4 text-white shadow-soft">
+      <section className="mt-5 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:mt-6 sm:gap-3">
+        <div className="min-w-[272px] snap-start rounded-[20px] bg-blue-700 p-4 text-white shadow-soft">
           <p className="text-sm font-semibold">Standard Therapeutics</p>
           <p className="mt-1 text-xs text-blue-100">Your performance is decent. Stay on track.</p>
           <div className="mt-2 flex justify-end">
             <ArcGauge value={71} label="71 / 100" />
           </div>
         </div>
-        <div className="min-w-[280px] snap-start rounded-2xl bg-emerald-800 p-4 text-white shadow-soft">
+        <div className="min-w-[272px] snap-start rounded-[20px] bg-emerald-800 p-4 text-white shadow-soft">
           <p className="text-sm font-semibold">Physical Age</p>
           <p className="mt-1 text-xs text-emerald-100">In relation to your current age.</p>
           <div className="mt-2 flex justify-end">
             <ArcGauge value={72} label="72%" />
           </div>
         </div>
-        <div className="min-w-[220px] snap-start rounded-2xl bg-slate-950 p-4 text-white shadow-soft">
+        <div className="min-w-[212px] snap-start rounded-[20px] bg-slate-950 p-4 text-white shadow-soft">
           <p className="text-sm font-semibold">VO2 Max</p>
           <p className="mt-3 text-3xl font-bold">45</p>
           <p className="text-xs text-white/70">ml/kg/min</p>
         </div>
       </section>
 
-      <section className="mt-5 rounded-3xl bg-slate-950 p-5 text-white shadow-soft">
+      <section className="mt-5 rounded-[24px] bg-slate-950 p-4 text-white shadow-soft sm:p-5">
         <p className="text-sm font-semibold">Walking + Running Distance</p>
         <p className="mt-1 text-xs text-slate-400">Linked to Apple Health on your iPhone.</p>
         <div className="mt-4 flex items-center justify-between gap-3">
@@ -177,7 +177,7 @@ export default function HomeDashboardView({
         </div>
       </section>
 
-      <section className="mt-6">
+      <section className="mt-5 sm:mt-6">
         <div className="grid grid-cols-[1.6fr_1fr_.8fr_1fr] border-b border-gray-200 pb-2 text-xs text-muted">
           <p>Name</p>
           <p>Status</p>
@@ -197,10 +197,10 @@ export default function HomeDashboardView({
           <Link
             href="/app/your-data"
             key={name}
-            className="grid grid-cols-[1.6fr_1fr_.8fr_1fr] items-center border-b border-gray-100 py-3"
+            className="grid grid-cols-[1.6fr_1fr_.8fr_1fr] items-center border-b border-gray-100 py-3.5"
           >
             <div>
-              <p className="text-sm font-semibold text-ink">{name}</p>
+              <p className="text-[13px] font-semibold text-ink sm:text-sm">{name}</p>
               <p className="text-xs text-muted">{source}</p>
             </div>
             <div>
@@ -208,33 +208,33 @@ export default function HomeDashboardView({
                 {status}
               </span>
             </div>
-            <p className="text-xs text-ink">{value}</p>
+            <p className="text-[11px] text-ink sm:text-xs">{value}</p>
             <Sparkline values={trendFor(name)} />
           </Link>
         ))}
       </section>
 
       <section className="mt-6">
-        <h2 className="mb-3 text-lg font-semibold tracking-tight text-ink">Next steps</h2>
-        <div className="grid gap-3">
-          <Link href="/app/uploads" className="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+        <h2 className="mb-2.5 text-lg font-semibold tracking-tight text-ink sm:mb-3">Next steps</h2>
+        <div className="grid gap-2.5 sm:gap-3">
+          <Link href="/app/uploads" className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
             <p className="text-lg">📤</p>
             <p className="mt-2 text-base font-semibold text-ink">Upload Lab Report</p>
             <p className="text-sm text-muted">PDF or image of your bloodwork</p>
           </Link>
-          <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+          <div className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
             <p className="text-lg">📅</p>
             <p className="mt-2 text-base font-semibold text-ink">Book Consultation</p>
             <p className="text-sm text-muted">Talk with a functional health coach</p>
           </div>
-          <Link href="/app/membership" className="rounded-2xl border border-gray-200 bg-white p-4 shadow-soft">
+          <Link href="/app/membership" className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
             <p className="text-lg">📋</p>
             <p className="mt-2 text-base font-semibold text-ink">Action Plan</p>
             <p className="text-sm text-muted">Your personalized plan after the call</p>
           </Link>
         </div>
 
-        <div className="mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+        <div className="mt-3 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:mt-4 sm:gap-3">
           {[
             "/assets/action-carousel-1.png",
             "/assets/action-carousel-2.png",
@@ -245,44 +245,44 @@ export default function HomeDashboardView({
             <Link
               key={img}
               href={idx === 4 ? "/app/membership" : "#"}
-              className="min-w-[310px] snap-start overflow-hidden rounded-2xl shadow-soft"
+              className="min-w-[296px] snap-start overflow-hidden rounded-[18px] shadow-soft sm:min-w-[310px]"
             >
-              <img src={img} alt={`Action carousel ${idx + 1}`} className="h-[220px] w-full object-cover" />
+              <img src={img} alt={`Action carousel ${idx + 1}`} className="h-[205px] w-full object-cover sm:h-[220px]" />
             </Link>
           ))}
         </div>
 
-        <div className="mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+        <div className="mt-2.5 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:mt-3 sm:gap-3">
           <Link
             href="/app/membership"
-            className="min-w-[260px] snap-start overflow-hidden rounded-2xl shadow-soft"
+            className="min-w-[248px] snap-start overflow-hidden rounded-[18px] shadow-soft sm:min-w-[260px]"
           >
-            <img src="/assets/action-plan-preview.png" alt="Action plan preview" className="h-[180px] w-full object-cover" />
+            <img src="/assets/action-plan-preview.png" alt="Action plan preview" className="h-[170px] w-full object-cover sm:h-[180px]" />
           </Link>
           <Link
             href="/app/membership"
-            className="min-w-[260px] snap-start overflow-hidden rounded-2xl shadow-soft"
+            className="min-w-[248px] snap-start overflow-hidden rounded-[18px] shadow-soft sm:min-w-[260px]"
           >
-            <img src="/assets/biomarker-cards.png" alt="Biomarker cards" className="h-[180px] w-full object-cover" />
+            <img src="/assets/biomarker-cards.png" alt="Biomarker cards" className="h-[170px] w-full object-cover sm:h-[180px]" />
           </Link>
         </div>
 
         <Link
           href="/app/membership"
-          className="mt-2 block rounded-xl bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white"
+          className="mt-2 block rounded-[12px] bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white"
         >
           Join today
         </Link>
       </section>
 
-      <section className="mt-7">
-        <h2 className="mb-3 text-lg font-semibold tracking-tight text-ink">Articles</h2>
-        <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
+      <section className="mt-6 sm:mt-7">
+        <h2 className="mb-2.5 text-lg font-semibold tracking-tight text-ink sm:mb-3">Articles</h2>
+        <div className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:gap-3">
           {articles.map((a) => (
             <button
               key={a.title}
               onClick={() => setActiveArticle(a)}
-              className="min-w-[260px] snap-start overflow-hidden rounded-2xl bg-slate-950 text-left shadow-soft"
+              className="min-w-[248px] snap-start overflow-hidden rounded-[18px] bg-slate-950 text-left shadow-soft sm:min-w-[260px]"
             >
               <img src={a.image} alt={a.title} className="h-36 w-full object-cover" />
               <p className="px-4 pt-3 text-sm font-semibold text-white">{a.title}</p>
@@ -292,16 +292,16 @@ export default function HomeDashboardView({
         </div>
       </section>
 
-      <section className="mt-6">
+      <section className="mt-5 sm:mt-6">
         <div className="relative overflow-hidden text-center text-white">
-          <img src="/assets/article-ad-card.png" alt="Advertisement" className="h-[290px] w-full object-cover" />
+          <img src="/assets/article-ad-card.png" alt="Advertisement" className="h-[265px] w-full object-cover sm:h-[290px]" />
           <p className="absolute inset-x-0 top-4 text-xs font-bold tracking-[0.18em]">ADVERTISEMENT</p>
         </div>
       </section>
 
-      <section className="bg-white px-1 py-6">
-        <h3 className="text-3xl font-extrabold text-ink">Need help deciding?</h3>
-        <img src="/assets/membership-help.png" alt="Membership help" className="mt-3 h-56 w-full object-cover" />
+      <section className="bg-white px-0.5 py-5 sm:py-6">
+        <h3 className="text-[30px] font-extrabold tracking-tight text-ink">Need help deciding?</h3>
+        <img src="/assets/membership-help.png" alt="Membership help" className="mt-2.5 h-52 w-full object-cover sm:mt-3 sm:h-56" />
         <p className="mt-2 text-center text-sm font-semibold text-black">
           Speak to our functional health coaches in a way that&apos;s convenient to you.
         </p>
@@ -310,9 +310,9 @@ export default function HomeDashboardView({
         </Link>
       </section>
 
-      <footer className="pb-8 pt-4 text-center">
-        <p className="text-xl font-bold text-ink">Your all in one health membership.</p>
-        <p className="mx-auto mt-2 max-w-xl text-sm leading-6 text-muted">
+      <footer className="pb-7 pt-3 text-center sm:pb-8 sm:pt-4">
+        <p className="text-[22px] font-bold tracking-tight text-ink sm:text-xl">Your all in one health membership.</p>
+        <p className="mx-auto mt-1.5 max-w-xl text-[13px] leading-6 text-muted sm:mt-2 sm:text-sm">
           The only health membership you need to become the healthiest version of yourself.
         </p>
       </footer>
