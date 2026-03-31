@@ -228,7 +228,7 @@ export default function HomeDashboardView({
             <p className="mt-2 text-base font-semibold text-ink">Book Consultation</p>
             <p className="text-sm text-muted">Talk with a functional health coach</p>
           </div>
-          <Link href="/app/membership" className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
+          <Link href="/app/action-plan" className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
             <p className="text-lg">📋</p>
             <p className="mt-2 text-base font-semibold text-ink">Action Plan</p>
             <p className="text-sm text-muted">Your personalized plan after the call</p>
@@ -255,7 +255,7 @@ export default function HomeDashboardView({
 
         <div className="mt-2.5 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:mt-3 sm:gap-3">
           <Link
-            href="/app/membership"
+            href="/app/action-plan"
             className="min-w-[248px] snap-start overflow-hidden rounded-[18px] shadow-soft sm:min-w-[260px]"
           >
             <img src="/assets/action-plan-preview.png" alt="Action plan preview" className="h-[170px] w-full object-cover sm:h-[180px]" />
