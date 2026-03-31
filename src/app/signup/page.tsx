@@ -47,10 +47,15 @@ export default function SignupPage() {
         onSubmit={onSubmit}
         className="w-full rounded-[28px] border border-white/70 bg-card/95 p-8 shadow-soft backdrop-blur"
       >
+        <img
+          src="/assets/logo.png"
+          alt="Standard Therapeutics"
+          className="mb-4 h-[77px] w-[77px] -ml-1 object-contain"
+        />
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
           Standard Therapeutics
         </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Sign up</h1>
+        <h1 className="mt-2 text-3xl font-semibold tracking-[-0.01em]">Create your account</h1>
         <p className="mt-2 text-sm text-muted">
           Create your Standard Therapeutics account.
         </p>

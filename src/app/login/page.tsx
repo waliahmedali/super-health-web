@@ -9,12 +9,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [debug, setDebug] = useState<{
-    hasSession: boolean;
-    userEmail: string | null;
-    cookieNames: string[];
-  } | null>(null);
-  const [debugError, setDebugError] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -44,40 +38,23 @@ export default function LoginPage() {
     window.location.assign("/app");
   };
 
-  const runDebug = async () => {
-    try {
-      setDebugError(null);
-      const supabase = createClient();
-      const [{ data: sessionData }, { data: userData }] = await Promise.all([
-        supabase.auth.getSession(),
-        supabase.auth.getUser(),
-      ]);
-      const cookieNames = document.cookie
-        .split(";")
-        .map((x) => x.trim().split("=")[0])
-        .filter(Boolean);
-      setDebug({
-        hasSession: !!sessionData.session,
-        userEmail: userData.user?.email ?? null,
-        cookieNames,
-      });
-    } catch (e) {
-      setDebugError(e instanceof Error ? e.message : "Unknown debug error");
-    }
-  };
-
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-10">
       <form
         onSubmit={onSubmit}
         className="w-full rounded-[28px] border border-white/70 bg-card/95 p-8 shadow-soft backdrop-blur"
       >
+        <img
+          src="/assets/logo.png"
+          alt="Standard Therapeutics"
+          className="mb-4 h-[77px] w-[77px] -ml-1 object-contain"
+        />
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
           Standard Therapeutics
         </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Login</h1>
+        <h1 className="mt-2 text-3xl font-semibold tracking-[-0.01em]">Welcome back</h1>
         <p className="mt-2 text-sm leading-6 text-muted">
-          Welcome back to your health dashboard.
+          Sign in to continue to your health dashboard.
         </p>
 
         <label className="mt-6 block text-sm font-medium text-ink">Email</label>
@@ -113,42 +90,6 @@ export default function LoginPage() {
             Create an account
           </Link>
         </p>
-
-        <div className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
-          <div className="mb-2 flex items-center justify-between">
-            <p className="font-semibold">Temporary auth debug</p>
-            <button
-              type="button"
-              onClick={() => void runDebug()}
-              className="rounded-md bg-white px-2 py-1 font-semibold text-amber-900"
-            >
-              Refresh debug
-            </button>
-          </div>
-          {debug ? (
-            <div className="space-y-1">
-              <p>
-                Session: <span className="font-semibold">{debug.hasSession ? "yes" : "no"}</span>
-              </p>
-              <p>
-                User: <span className="font-semibold">{debug.userEmail ?? "-"}</span>
-              </p>
-              <p className="break-all">
-                Cookies:{" "}
-                <span className="font-semibold">
-                  {debug.cookieNames.length ? debug.cookieNames.join(", ") : "(none)"}
-                </span>
-              </p>
-            </div>
-          ) : (
-            <p>Tap "Refresh debug" after login attempt.</p>
-          )}
-          {debugError ? (
-            <p className="mt-2 break-all font-semibold text-red-700">
-              Debug error: {debugError}
-            </p>
-          ) : null}
-        </div>
       </form>
     </main>
   );
