@@ -341,7 +341,7 @@ export default function HomeDashboardView({
             { label: "Your Data", icon: "🧪", href: "/app/your-data" },
             { label: "Uploads", icon: "📤", href: "/app/uploads" },
             { label: "Membership", icon: "💳", href: "/app/membership" },
-            { label: "Account", icon: "👤", href: "/login" },
+            { label: "Profile", icon: "👤", href: "/app/profile" },
           ].map((item) => (
             <Link
               key={item.label}
