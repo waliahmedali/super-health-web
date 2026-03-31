@@ -18,27 +18,38 @@ export default function SignupPage() {
     setError(null);
     setSuccess(null);
     setLoading(true);
-    const supabase = createClient();
-    const { data, error } = await supabase.auth.signUp({ email, password });
-    setLoading(false);
-    if (error) {
-      setError(error.message);
-      return;
-    }
+    try {
+      const supabase = createClient();
+      const signUpPromise = supabase.auth.signUp({ email: email.trim(), password });
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error("Sign-up timed out. Please try again.")), 15000);
+      });
+      const { data, error } = await Promise.race([signUpPromise, timeoutPromise]);
+      if (error) {
+        setError(error.message);
+        return;
+      }
 
-    // If email confirmation is enabled, Supabase often returns no session here.
-    if (!data.session) {
-      setSuccess(
-        "Account created. Please verify your email, then log in.",
-      );
-      router.push("/login");
+      // If email confirmation is enabled, Supabase often returns no session here.
+      if (!data.session) {
+        setSuccess("Account created. Please verify your email, then log in.");
+        router.push("/login");
+        router.refresh();
+        return;
+      }
+
+      setSuccess("Account created. Redirecting to your app...");
+      router.push("/app");
       router.refresh();
-      return;
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to create account right now. Please try again.",
+      );
+    } finally {
+      setLoading(false);
     }
-
-    setSuccess("Account created. Redirecting to your app...");
-    router.push("/app");
-    router.refresh();
   };
 
   return (
