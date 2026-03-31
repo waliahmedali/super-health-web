@@ -7,6 +7,7 @@ type Article = {
   title: string;
   subtitle: string;
   body: string;
+  image: string;
 };
 
 function ArcGauge({ value, label }: { value: number; label: string }) {
@@ -72,40 +73,48 @@ export default function HomeDashboardView({
       title: "Could a sleeping mask dramatically improve your chances of sleep?",
       subtitle: "Exploring the new mind-eye connection and how it impacts rest.",
       body: "There is growing evidence that darkness cues in the eyes help synchronize your circadian rhythm and recovery.",
+      image: "/assets/article-sleep-mask.png",
     },
     {
       title: "The Semiotics of Heartburn",
       subtitle: "Why coffee and low pH can change how your esophagus feels.",
       body: "Heartburn is a signal, not just a symptom. This article explores reflux patterns and triggers.",
+      image: "/assets/article-heartburn.png",
     },
     {
       title: "The Anti Inflammatory Diet",
       subtitle: "Evidence-based eating to prevent and reduce inflammation.",
       body: "A practical framework for anti-inflammatory nutrition with whole-food swaps you can sustain.",
+      image: "/assets/article-anti-inflammatory.png",
     },
     {
       title: "Integrative Medicine: An Approach of The Future",
       subtitle: "Why tomorrow's integrative medicine will just be called good medicine.",
       body: "The future of care combines rigorous diagnostics with lifestyle and behavior medicine.",
+      image: "/assets/article-integrative-medicine.png",
     },
     {
       title: "Peptide Power",
       subtitle: "Peptides are exploding in popularity - but are they safe and effective?",
       body: "A primer on what the evidence says and where caution is still needed.",
+      image: "/assets/article-peptide-power.png",
     },
     {
       title: "Coenzyme Q10",
       subtitle: "A closer look at this powerhouse quinone and where it shows up.",
       body: "CoQ10 supports mitochondrial energy production and oxidative balance.",
+      image: "/assets/article-coenzyme-q10.png",
     },
   ];
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-10">
-      <header className="mb-6 pt-2 sm:mb-8">
-        <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-900 text-sm font-semibold text-white">
-          ST
-        </div>
+    <main className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8">
+      <header className="mb-6 rounded-3xl border border-white/70 bg-card/95 p-5 shadow-soft backdrop-blur sm:mb-8">
+        <img
+          src="/assets/logo.png"
+          alt="Standard Therapeutics"
+          className="mb-3 h-12 w-12 object-contain"
+        />
         <h1 className="text-3xl font-bold tracking-tight text-ink sm:text-4xl">Standard Therapeutics</h1>
         <p className="mt-1 text-sm text-muted">Your home to functional health</p>
         <p className="mt-2 text-sm text-muted">
@@ -227,19 +236,18 @@ export default function HomeDashboardView({
 
         <div className="mt-4 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
           {[
-            "from-indigo-700 to-blue-700",
-            "from-slate-900 to-slate-800",
-            "from-cyan-700 to-blue-600",
-            "from-violet-700 to-indigo-700",
-            "from-emerald-700 to-teal-600",
-          ].map((bg, idx) => (
+            "/assets/action-carousel-1.png",
+            "/assets/action-carousel-2.png",
+            "/assets/action-carousel-insert.png",
+            "/assets/action-carousel-4.png",
+            "/assets/action-carousel-last.png",
+          ].map((img, idx) => (
             <Link
-              key={bg}
+              key={img}
               href={idx === 4 ? "/app/membership" : "#"}
-              className={`min-w-[300px] snap-start rounded-2xl bg-gradient-to-br p-5 text-white shadow-soft ${bg}`}
+              className="min-w-[310px] snap-start overflow-hidden rounded-2xl shadow-soft"
             >
-              <p className="text-lg font-semibold">New Era in Personal Health</p>
-              <p className="mt-2 text-sm text-white/85">Action card {idx + 1}</p>
+              <img src={img} alt={`Action carousel ${idx + 1}`} className="h-[220px] w-full object-cover" />
             </Link>
           ))}
         </div>
@@ -247,15 +255,15 @@ export default function HomeDashboardView({
         <div className="mt-3 flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
           <Link
             href="/app/membership"
-            className="min-w-[260px] snap-start rounded-2xl bg-gradient-to-br from-slate-900 to-slate-700 p-5 text-white shadow-soft"
+            className="min-w-[260px] snap-start overflow-hidden rounded-2xl shadow-soft"
           >
-            <p className="text-base font-semibold">Action Plan Preview</p>
+            <img src="/assets/action-plan-preview.png" alt="Action plan preview" className="h-[180px] w-full object-cover" />
           </Link>
           <Link
             href="/app/membership"
-            className="min-w-[260px] snap-start rounded-2xl bg-gradient-to-br from-blue-700 to-indigo-700 p-5 text-white shadow-soft"
+            className="min-w-[260px] snap-start overflow-hidden rounded-2xl shadow-soft"
           >
-            <p className="text-base font-semibold">Biomarker Cards</p>
+            <img src="/assets/biomarker-cards.png" alt="Biomarker cards" className="h-[180px] w-full object-cover" />
           </Link>
         </div>
 
@@ -270,15 +278,13 @@ export default function HomeDashboardView({
       <section className="mt-7">
         <h2 className="mb-3 text-lg font-semibold tracking-tight text-ink">Articles</h2>
         <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2">
-          {articles.map((a, idx) => (
+          {articles.map((a) => (
             <button
               key={a.title}
               onClick={() => setActiveArticle(a)}
-              className={`min-w-[260px] snap-start overflow-hidden rounded-2xl text-left shadow-soft ${
-                idx % 2 === 0 ? "bg-slate-950" : "bg-slate-900"
-              }`}
+              className="min-w-[260px] snap-start overflow-hidden rounded-2xl bg-slate-950 text-left shadow-soft"
             >
-              <div className="h-36 bg-gradient-to-br from-slate-700 to-slate-500" />
+              <img src={a.image} alt={a.title} className="h-36 w-full object-cover" />
               <p className="px-4 pt-3 text-sm font-semibold text-white">{a.title}</p>
               <p className="px-4 pb-4 pt-2 text-xs text-slate-300">{a.subtitle}</p>
             </button>
@@ -287,15 +293,15 @@ export default function HomeDashboardView({
       </section>
 
       <section className="mt-6">
-        <div className="relative overflow-hidden bg-slate-900 py-16 text-center text-white">
-          <p className="text-xs font-bold tracking-[0.18em]">ADVERTISEMENT</p>
-          <p className="mt-2 text-lg font-semibold">Partner Feature</p>
+        <div className="relative overflow-hidden text-center text-white">
+          <img src="/assets/article-ad-card.png" alt="Advertisement" className="h-[290px] w-full object-cover" />
+          <p className="absolute inset-x-0 top-4 text-xs font-bold tracking-[0.18em]">ADVERTISEMENT</p>
         </div>
       </section>
 
       <section className="bg-white px-1 py-6">
         <h3 className="text-3xl font-extrabold text-ink">Need help deciding?</h3>
-        <div className="mt-3 h-52 bg-gradient-to-br from-gray-200 to-gray-300" />
+        <img src="/assets/membership-help.png" alt="Membership help" className="mt-3 h-56 w-full object-cover" />
         <p className="mt-2 text-center text-sm font-semibold text-black">
           Speak to our functional health coaches in a way that&apos;s convenient to you.
         </p>
@@ -319,7 +325,7 @@ export default function HomeDashboardView({
           >
             ✕
           </button>
-          <div className="h-72 bg-gradient-to-br from-slate-700 to-slate-500" />
+          <img src={activeArticle.image} alt={activeArticle.title} className="h-72 w-full object-cover" />
           <div className="p-5">
             <h3 className="text-3xl font-extrabold text-white">{activeArticle.title}</h3>
             <p className="mt-3 text-sm leading-7 text-slate-300">{activeArticle.body}</p>
