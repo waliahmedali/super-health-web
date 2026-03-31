@@ -67,6 +67,7 @@ export default function HomeDashboardView({
   userEmail?: string;
 }) {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const articles: Article[] = [
     {
@@ -109,7 +110,15 @@ export default function HomeDashboardView({
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-8">
-      <header className="mb-5 rounded-[28px] border border-white/70 bg-card/95 p-4 shadow-soft backdrop-blur sm:mb-7 sm:p-5">
+      <header className="relative mb-5 rounded-[28px] border border-white/70 bg-card/95 p-4 shadow-soft backdrop-blur sm:mb-7 sm:p-5">
+        <button
+          type="button"
+          aria-label="Open dashboard menu"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 bg-white text-xl text-ink"
+        >
+          ☰
+        </button>
         <img
           src="/assets/logo.png"
           alt="Standard Therapeutics"
@@ -122,6 +131,29 @@ export default function HomeDashboardView({
             ? `Welcome back, ${userEmail}.`
             : "Guest preview mode is active. Explore the app-style experience in your browser."}
         </p>
+
+        {menuOpen ? (
+          <div className="mt-4 grid grid-cols-2 gap-2 rounded-2xl border border-gray-200 bg-white p-2 sm:grid-cols-3">
+            {[
+              { label: "Dashboard", icon: "🏠", href: "/app" },
+              { label: "Your Data", icon: "🧪", href: "/app/your-data" },
+              { label: "Uploads", icon: "📤", href: "/app/uploads" },
+              { label: "Membership", icon: "💳", href: "/app/membership" },
+              { label: "Login", icon: "🔐", href: "/login" },
+              { label: "Sign up", icon: "🆕", href: "/signup" },
+            ].map((item) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-xl border border-gray-200 bg-card px-3 py-2 text-sm font-semibold text-ink transition hover:bg-gray-50"
+              >
+                <span className="mr-2">{item.icon}</span>
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        ) : null}
       </header>
 
       <section>
