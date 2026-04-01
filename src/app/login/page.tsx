@@ -56,7 +56,7 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-[100dvh] flex-col bg-[#e8eaed]">
       <div className="flex w-full flex-1 flex-col">
-        <div className="relative h-[48vh] min-h-[260px] max-h-[520px] w-full shrink-0 overflow-hidden sm:h-[46vh] sm:max-h-[560px]">
+        <div className="relative h-[25vh] min-h-[150px] max-h-[220px] w-full shrink-0 overflow-hidden sm:h-[24vh] sm:max-h-[260px]">
           <img
             src="/assets/login-hero.png"
             alt="Standard Therapeutics — Your baseline is your blueprint"
@@ -64,7 +64,7 @@ export default function LoginPage() {
           />
         </div>
 
-        <div className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col">
+        <div className="relative z-10 -mt-9 flex min-h-0 flex-1 flex-col sm:-mt-10">
           <form
             onSubmit={onSubmit}
             className="flex min-h-0 flex-1 flex-col rounded-t-[36px] bg-white px-6 pb-10 pt-6 shadow-[0_-8px_30px_rgba(15,23,42,0.08)] sm:px-8"
