@@ -30,13 +30,14 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
 
   useEffect(() => {
     if (!supabase) return;
+    const client = supabase;
     let mounted = true;
     async function loadRows() {
       const {
         data: { user },
-      } = await supabase.auth.getUser();
+      } = await client.auth.getUser();
       if (!user) return;
-      const { data } = await supabase
+      const { data } = await client
         .from("upload_records")
         .select("id, file_name, file_path, mime_type, size_bytes, uploaded_at")
         .eq("user_id", user.id)
