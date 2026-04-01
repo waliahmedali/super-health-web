@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [emailInputEnabled, setEmailInputEnabled] = useState(false);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,9 +84,15 @@ export default function LoginPage() {
             <label className="mt-5 block text-xs font-medium text-muted">Email</label>
             <input
               type="email"
+              name="email"
               required
               value={email}
+              readOnly={!emailInputEnabled}
               onChange={(e) => setEmail(e.target.value)}
+              onFocus={(e) => {
+                if (e.nativeEvent.isTrusted) setEmailInputEnabled(true);
+              }}
+              autoComplete="email"
               placeholder="Your email"
               className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
             />
