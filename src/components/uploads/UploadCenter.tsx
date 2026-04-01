@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/client";
 
 type UploadRow = {
@@ -20,9 +21,15 @@ function fmtBytes(bytes: number | null) {
 }
 
 export default function UploadCenter({ initialRows }: { initialRows: UploadRow[] }) {
-  const supabase = useMemo(() => createClient(), []);
+  const [supabase, setSupabase] = useState<SupabaseClient | null>(null);
   const [rows, setRows] = useState<UploadRow[]>(initialRows);
+
   useEffect(() => {
+    setSupabase(createClient());
+  }, []);
+
+  useEffect(() => {
+    if (!supabase) return;
     let mounted = true;
     async function loadRows() {
       const {
@@ -46,6 +53,10 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
   const [loading, setLoading] = useState(false);
 
   const onUpload = async (file: File) => {
+    if (!supabase) {
+      setError("App configuration is not ready. Please refresh.");
+      return;
+    }
     setError(null);
     setLoading(true);
     try {
@@ -105,7 +116,7 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
             type="file"
             accept=".pdf,image/*"
             className="hidden"
-            disabled={loading}
+            disabled={loading || !supabase}
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) void onUpload(file);
