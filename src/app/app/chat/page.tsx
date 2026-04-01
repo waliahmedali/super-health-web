@@ -63,7 +63,7 @@ export default function ChatPage() {
             onKeyDown={(e) => {
               if (e.key === "Enter") sendMessage();
             }}
-            placeholder="iMessage-style text box..."
+            placeholder="Write here"
             className="h-11 flex-1 rounded-full border border-gray-200 px-4 text-sm outline-none ring-accent focus:ring-2"
           />
           <button
