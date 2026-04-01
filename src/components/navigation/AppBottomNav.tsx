@@ -2,13 +2,20 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  IoHomeOutline,
+  IoPulseOutline,
+  IoPersonOutline,
+  IoChatbubbleEllipsesOutline,
+  IoCardOutline,
+} from "react-icons/io5";
 
 const items = [
-  { label: "Home", icon: "🏠", href: "/app" },
-  { label: "Your Data", icon: "🧪", href: "/app/your-data" },
-  { label: "Profile", icon: "👤", href: "/app/profile" },
-  { label: "Chat", icon: "💬", href: "/app/chat" },
-  { label: "Membership", icon: "💳", href: "/app/membership" },
+  { label: "Home", icon: IoHomeOutline, href: "/app" },
+  { label: "Your Data", icon: IoPulseOutline, href: "/app/your-data" },
+  { label: "Profile", icon: IoPersonOutline, href: "/app/profile" },
+  { label: "Chat", icon: IoChatbubbleEllipsesOutline, href: "/app/chat" },
+  { label: "Membership", icon: IoCardOutline, href: "/app/membership" },
 ];
 
 export default function AppBottomNav() {
@@ -20,17 +27,18 @@ export default function AppBottomNav() {
         {items.map((item) => {
           const isActive =
             pathname === item.href || (item.href !== "/app" && pathname.startsWith(item.href));
+          const Icon = item.icon;
           return (
             <Link
               key={item.label}
               href={item.href}
               className={`flex flex-col items-center justify-center rounded-xl py-2 text-[11px] font-semibold transition ${
                 isActive
-                  ? "bg-gray-100 text-ink"
+                  ? "bg-blue-50 text-blue-600"
                   : "text-muted hover:bg-gray-50 hover:text-ink"
               }`}
             >
-              <span className="text-lg leading-none">{item.icon}</span>
+              <Icon className="text-[20px] leading-none" />
               <span className="mt-1">{item.label}</span>
             </Link>
           );
