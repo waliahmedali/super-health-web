@@ -63,11 +63,6 @@ export default function LoginPage() {
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-black/25" />
-          <img
-            src="/assets/login-top-logo.png"
-            alt="Standard Therapeutics"
-            className="absolute left-4 top-4 h-10 w-10 object-contain"
-          />
         </div>
 
         <form
