@@ -71,7 +71,7 @@ export default function MembershipView() {
           <img
             src="/assets/membership-preview.png"
             alt="Membership card preview"
-            className="h-44 w-full object-contain bg-[#0f3ea8]"
+            className="h-[220px] w-full object-contain bg-[#0f3ea8] sm:h-[250px]"
           />
         </div>
 
