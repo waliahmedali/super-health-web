@@ -54,85 +54,90 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#f4f5f7]">
-      <div className="mx-auto w-full max-w-md">
-        <div className="relative h-56 overflow-hidden">
+    <main className="min-h-screen bg-[#e8eaed]">
+      <div className="mx-auto w-full max-w-[380px]">
+        <div className="relative h-44 overflow-hidden sm:h-48">
           <img
             src="/assets/login-hero.png"
-            alt="Hero"
+            alt=""
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-black/20" />
+          <p className="absolute left-5 top-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-white drop-shadow-sm">
+            Standard Therapeutics
+          </p>
         </div>
 
-        <form
-          onSubmit={onSubmit}
-          className="-mt-6 rounded-t-[28px] bg-[#f4f5f7] px-6 pb-10 pt-8"
-        >
-          <h1 className="text-[36px] font-semibold leading-none tracking-[-0.02em] text-ink">
-            Welcome back
-          </h1>
-
-          <p className="mt-3 text-[20px] leading-none text-muted">Don&apos;t have an account?</p>
-          <p className="mt-1 text-[20px] leading-none">
-            <Link href="/signup" className="text-accent">
-              Create an account
-            </Link>
-          </p>
-
-          <label className="mt-7 block text-[18px] text-ink">Email</label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Your email"
-            className="mt-2 h-14 w-full rounded-2xl border border-gray-200 bg-white px-4 text-lg outline-none ring-accent/50 focus:ring-2"
-          />
-
-          <label className="mt-4 block text-[18px] text-ink">Password</label>
-          <input
-            type="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Your password"
-            className="mt-2 h-14 w-full rounded-2xl border border-gray-200 bg-white px-4 text-lg outline-none ring-accent/50 focus:ring-2"
-          />
-
-          {error ? <p className="mt-3 text-base text-red-600">{error}</p> : null}
-
-          <button
-            disabled={loading}
-            className="mt-5 h-14 w-full rounded-2xl bg-[#05142c] text-2xl font-medium text-white disabled:opacity-60"
+        <div className="relative z-10 -mt-7">
+          <form
+            onSubmit={onSubmit}
+            className="rounded-t-[36px] bg-white px-5 pb-8 pt-6 shadow-[0_-8px_30px_rgba(15,23,42,0.08)]"
           >
-            {loading ? "Signing in..." : "Login"}
-          </button>
+            <h1 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink">
+              Welcome back
+            </h1>
 
-          <p className="mt-4 text-[16px] text-muted">Forgot your login details?</p>
-          <p className="mt-1 text-[16px]">
-            <a href="#" className="text-accent">
-              Reset password
-            </a>
-          </p>
-          <p className="mt-1 text-[16px]">
-            <a href="#" className="text-accent">
-              Sign in with magic link.
-            </a>
-          </p>
+            <p className="mt-2 text-sm text-muted">Don&apos;t have an account?</p>
+            <p className="mt-0.5 text-sm">
+              <Link href="/signup" className="font-medium text-accent">
+                Create an account
+              </Link>
+            </p>
 
-          <div className="mt-7 flex gap-5 text-sm text-muted">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-          </div>
+            <label className="mt-5 block text-xs font-medium text-muted">Email</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Your email"
+              className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
+            />
 
-          <p className="mt-6 text-[16px] text-muted">
-            New here?{" "}
-            <Link href="/signup" className="text-accent">
-              Create an account
-            </Link>
-          </p>
-        </form>
+            <label className="mt-3 block text-xs font-medium text-muted">Password</label>
+            <input
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Your password"
+              className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
+            />
+
+            {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
+
+            <button
+              disabled={loading}
+              className="mt-4 h-11 w-full rounded-xl bg-[#05142c] text-[15px] font-semibold text-white disabled:opacity-60"
+            >
+              {loading ? "Signing in..." : "Login"}
+            </button>
+
+            <p className="mt-3 text-xs text-muted">Forgot your login details?</p>
+            <p className="mt-0.5 text-xs">
+              <a href="#" className="text-accent">
+                Reset password
+              </a>
+            </p>
+            <p className="mt-0.5 text-xs">
+              <a href="#" className="text-accent">
+                Sign in with magic link.
+              </a>
+            </p>
+
+            <div className="mt-5 flex gap-4 text-[11px] text-muted">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+            </div>
+
+            <p className="mt-4 text-xs text-muted">
+              New here?{" "}
+              <Link href="/signup" className="font-medium text-accent">
+                Create an account
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </main>
   );
