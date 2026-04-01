@@ -22,7 +22,7 @@ export default function AppBottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-gray-200 bg-white/95 px-4 pb-safe pt-2 backdrop-blur sm:px-6">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-gray-200 bg-white px-4 pt-2 shadow-[0_-8px_24px_rgba(15,23,42,0.08)] sm:px-6">
       <div className="mx-auto grid w-full max-w-6xl grid-cols-5 gap-1 pb-2">
         {items.map((item) => {
           const isActive =

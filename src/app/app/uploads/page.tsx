@@ -1,24 +1,8 @@
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
 import UploadCenter from "@/components/uploads/UploadCenter";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 export default async function UploadsPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  let rows: any[] = [];
-  if (user) {
-    const res = await supabase
-      .from("upload_records")
-      .select("id, file_name, file_path, mime_type, size_bytes, uploaded_at")
-      .eq("user_id", user.id)
-      .order("uploaded_at", { ascending: false });
-    rows = res.data ?? [];
-  }
-
   return (
     <main className="mx-auto w-full max-w-5xl px-6 py-10 pb-24">
       <div className="mb-6 flex items-center justify-between">
@@ -36,7 +20,7 @@ export default async function UploadsPage() {
         </Link>
       </div>
 
-      <UploadCenter initialRows={(rows ?? []) as any} />
+      <UploadCenter initialRows={[]} />
       <AppBottomNav />
     </main>
   );

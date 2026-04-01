@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type UploadRow = {
@@ -22,6 +22,26 @@ function fmtBytes(bytes: number | null) {
 export default function UploadCenter({ initialRows }: { initialRows: UploadRow[] }) {
   const supabase = useMemo(() => createClient(), []);
   const [rows, setRows] = useState<UploadRow[]>(initialRows);
+  useEffect(() => {
+    let mounted = true;
+    async function loadRows() {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) return;
+      const { data } = await supabase
+        .from("upload_records")
+        .select("id, file_name, file_path, mime_type, size_bytes, uploaded_at")
+        .eq("user_id", user.id)
+        .order("uploaded_at", { ascending: false });
+      if (mounted && data) setRows(data as UploadRow[]);
+    }
+    void loadRows();
+    return () => {
+      mounted = false;
+    };
+  }, [supabase]);
+
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 

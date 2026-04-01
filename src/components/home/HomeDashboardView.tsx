@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 type Article = {
@@ -12,13 +12,31 @@ type Article = {
 };
 
 function ArcGauge({ value, label }: { value: number; label: string }) {
-  const fill = `conic-gradient(from 180deg, #ffffff ${value}%, rgba(255,255,255,0.28) ${value}% 100%)`;
+  const radius = 42;
+  const circumference = Math.PI * radius;
+  const dash = (Math.max(0, Math.min(100, value)) / 100) * circumference;
   return (
-    <div className="relative flex h-20 w-40 items-end justify-center overflow-hidden">
-      <div className="absolute left-0 top-0 h-40 w-40 rounded-full" style={{ background: fill }} />
-      <div className="absolute left-2 top-2 h-36 w-36 rounded-full bg-transparent" />
-      <div className="absolute bottom-0 h-16 w-32 rounded-t-full bg-black/10" />
-      <p className="relative z-10 text-xs font-semibold text-white">{label}</p>
+    <div className="relative h-16 w-28">
+      <svg viewBox="0 0 120 70" className="h-full w-full">
+        <path
+          d="M 18 60 A 42 42 0 0 1 102 60"
+          fill="none"
+          stroke="rgba(255,255,255,0.28)"
+          strokeWidth="8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 18 60 A 42 42 0 0 1 102 60"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="8"
+          strokeLinecap="round"
+          strokeDasharray={`${dash} ${circumference}`}
+        />
+      </svg>
+      <p className="absolute inset-x-0 bottom-0 text-center text-xs font-semibold text-white">
+        {label}
+      </p>
     </div>
   );
 }
@@ -35,6 +53,20 @@ function Sparkline({ values }: { values: number[] }) {
   return (
     <svg width="84" height="28" viewBox="0 0 84 28" className="text-accent">
       <polyline fill="none" stroke="currentColor" strokeWidth="2" points={points} />
+      {values.map((v, i) => {
+        const x = (i / (values.length - 1)) * 84;
+        const y = 28 - v * 28;
+        return (
+          <circle
+            key={`${x}-${y}`}
+            cx={x}
+            cy={y}
+            r={i === values.length - 1 ? 2.5 : 1.8}
+            fill="currentColor"
+            opacity={i === values.length - 1 ? 1 : 0.65}
+          />
+        );
+      })}
     </svg>
   );
 }
@@ -42,23 +74,23 @@ function Sparkline({ values }: { values: number[] }) {
 function trendFor(name: string) {
   switch (name) {
     case "LDL Cholesterol":
-      return [0.62, 0.58, 0.55, 0.52, 0.5];
+      return [0.66, 0.63, 0.57, 0.61, 0.53, 0.55, 0.49];
     case "Vitamin D (25-OH)":
-      return [0.32, 0.26, 0.22, 0.27, 0.33];
+      return [0.26, 0.2, 0.24, 0.22, 0.31, 0.29, 0.36];
     case "Total Cholesterol":
-      return [0.55, 0.56, 0.54, 0.52, 0.53];
+      return [0.6, 0.58, 0.54, 0.57, 0.52, 0.49, 0.51];
     case "Heart Rate Variability (HRV)":
-      return [0.42, 0.6, 0.48, 0.66, 0.56];
+      return [0.41, 0.62, 0.5, 0.69, 0.53, 0.64, 0.57];
     case "Pace of Aging":
-      return [0.58, 0.6, 0.62, 0.64, 0.66];
+      return [0.54, 0.6, 0.58, 0.63, 0.61, 0.66, 0.65];
     case "Biological Age":
-      return [0.52, 0.5, 0.49, 0.47, 0.46];
+      return [0.56, 0.52, 0.49, 0.5, 0.47, 0.44, 0.46];
     case "Ferritin":
-      return [0.58, 0.5, 0.44, 0.5, 0.57];
+      return [0.63, 0.52, 0.45, 0.51, 0.47, 0.56, 0.61];
     case "Free Testosterone":
-      return [0.46, 0.5, 0.43, 0.55, 0.6];
+      return [0.43, 0.49, 0.41, 0.54, 0.5, 0.58, 0.62];
     default:
-      return [0.4, 0.48, 0.44, 0.52, 0.5];
+      return [0.38, 0.47, 0.42, 0.53, 0.48, 0.56, 0.5];
   }
 }
 
@@ -68,6 +100,15 @@ export default function HomeDashboardView({
   userEmail?: string;
 }) {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
+
+  useEffect(() => {
+    if (!activeArticle) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [activeArticle]);
 
   const articles: Article[] = [
     {
@@ -219,7 +260,11 @@ export default function HomeDashboardView({
       <section className="mt-6">
         <h2 className="mb-2.5 text-lg font-semibold tracking-tight text-ink sm:mb-3">Next steps</h2>
         <div className="grid gap-2.5 sm:gap-3">
-          <Link href="/app/uploads" className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft">
+          <Link
+            href="/app/uploads"
+            prefetch
+            className="rounded-[18px] border border-gray-200 bg-white p-4 shadow-soft transition active:scale-[0.99]"
+          >
             <p className="text-lg">📤</p>
             <p className="mt-2 text-base font-semibold text-ink">Upload Lab Report</p>
             <p className="text-sm text-muted">PDF or image of your bloodwork</p>
@@ -320,7 +365,7 @@ export default function HomeDashboardView({
       </footer>
 
       {activeArticle ? (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950">
+        <div className="fixed inset-0 z-[70] min-h-screen overflow-y-auto bg-[#020617]">
           <button
             onClick={() => setActiveArticle(null)}
             className="absolute right-4 top-4 rounded-full bg-white/10 px-3 py-1 text-xl text-white"
