@@ -56,24 +56,12 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-[100dvh] flex-col bg-[#e8eaed]">
       <div className="flex w-full flex-1 flex-col">
-        <header className="shrink-0 bg-black px-5 py-4 sm:px-6 sm:py-5">
-          <div className="flex flex-col gap-0 text-left font-extrabold tracking-[-0.04em] text-white">
-            <span className="block text-[clamp(1.625rem,5vw,2.125rem)] leading-[0.9]">
-              Standard
-            </span>
-            <span className="block text-[clamp(1.625rem,5vw,2.125rem)] leading-[0.9]">
-              Therapeutics
-            </span>
-          </div>
-        </header>
-
-        <div className="relative h-[42vh] min-h-[200px] max-h-[360px] w-full shrink-0 overflow-hidden sm:max-h-[420px]">
+        <div className="relative h-[48vh] min-h-[240px] max-h-[480px] w-full shrink-0 overflow-hidden sm:h-[44vh] sm:max-h-[520px]">
           <img
             src="/assets/login-hero.png"
-            alt=""
-            className="h-full w-full object-cover"
+            alt="Standard Therapeutics — Your baseline is your blueprint"
+            className="h-full w-full object-cover object-[center_35%]"
           />
-          <div className="absolute inset-0 bg-black/20" />
         </div>
 
         <div className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col">
