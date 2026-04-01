@@ -56,11 +56,11 @@ export default function LoginPage() {
   return (
     <main className="flex min-h-[100dvh] flex-col bg-[#e8eaed]">
       <div className="flex w-full flex-1 flex-col">
-        <div className="relative h-[48vh] min-h-[240px] max-h-[480px] w-full shrink-0 overflow-hidden sm:h-[44vh] sm:max-h-[520px]">
+        <div className="relative h-[48vh] min-h-[260px] max-h-[520px] w-full shrink-0 overflow-hidden sm:h-[46vh] sm:max-h-[560px]">
           <img
             src="/assets/login-hero.png"
             alt="Standard Therapeutics — Your baseline is your blueprint"
-            className="h-full w-full object-cover object-[center_35%]"
+            className="h-full w-full object-cover object-left-top"
           />
         </div>
 
