@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import BiomarkerTable from "@/components/your-data/BiomarkerTable";
+import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 export default async function YourDataPage() {
   const supabase = await createClient();
@@ -22,7 +23,7 @@ export default async function YourDataPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-6xl px-6 py-10">
+    <main className="mx-auto w-full max-w-6xl px-6 py-10 pb-24">
       <div className="mb-6 flex items-center justify-between">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
@@ -53,6 +54,7 @@ export default async function YourDataPage() {
       ) : (
         <BiomarkerTable rows={rows ?? []} />
       )}
+      <AppBottomNav />
     </main>
   );
 }

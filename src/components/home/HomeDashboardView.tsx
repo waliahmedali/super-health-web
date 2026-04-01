@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 type Article = {
   title: string;
@@ -334,26 +335,7 @@ export default function HomeDashboardView({
         </div>
       ) : null}
 
-      <nav className="fixed bottom-0 left-0 right-0 z-40 border-t border-gray-200 bg-white/95 px-4 pb-safe pt-2 backdrop-blur sm:px-6">
-        <div className="mx-auto grid w-full max-w-6xl grid-cols-5 gap-1 pb-2">
-          {[
-            { label: "Home", icon: "🏠", href: "/app" },
-            { label: "Your Data", icon: "🧪", href: "/app/your-data" },
-            { label: "Uploads", icon: "📤", href: "/app/uploads" },
-            { label: "Membership", icon: "💳", href: "/app/membership" },
-            { label: "Profile", icon: "👤", href: "/app/profile" },
-          ].map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="flex flex-col items-center justify-center rounded-xl py-2 text-[11px] font-semibold text-muted transition hover:bg-gray-50 hover:text-ink"
-            >
-              <span className="text-lg leading-none">{item.icon}</span>
-              <span className="mt-1">{item.label}</span>
-            </Link>
-          ))}
-        </div>
-      </nav>
+      <AppBottomNav />
     </main>
   );
 }

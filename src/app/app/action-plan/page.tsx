@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 export default function ActionPlanPage() {
   return (
@@ -50,6 +51,7 @@ export default function ActionPlanPage() {
           Back to Home
         </Link>
       </section>
+      <AppBottomNav />
     </main>
   );
 }

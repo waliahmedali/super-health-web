@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 export default async function ProfilePage() {
   const supabase = await createClient();
@@ -179,6 +180,7 @@ export default async function ProfilePage() {
           Back to Home
         </Link>
       </section>
+      <AppBottomNav />
     </main>
   );
 }
