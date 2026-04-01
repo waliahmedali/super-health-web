@@ -54,24 +54,21 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#e8eaed]">
-      <div className="mx-auto w-full max-w-[380px]">
-        <div className="relative h-44 overflow-hidden sm:h-48">
+    <main className="flex min-h-[100dvh] flex-col bg-[#e8eaed]">
+      <div className="flex w-full flex-1 flex-col">
+        <div className="relative h-[42vh] min-h-[200px] max-h-[360px] w-full shrink-0 overflow-hidden sm:max-h-[420px]">
           <img
             src="/assets/login-hero.png"
             alt=""
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-black/20" />
-          <p className="absolute left-5 top-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-white drop-shadow-sm">
-            Standard Therapeutics
-          </p>
         </div>
 
-        <div className="relative z-10 -mt-7">
+        <div className="relative z-10 -mt-7 flex min-h-0 flex-1 flex-col">
           <form
             onSubmit={onSubmit}
-            className="rounded-t-[36px] bg-white px-5 pb-8 pt-6 shadow-[0_-8px_30px_rgba(15,23,42,0.08)]"
+            className="flex min-h-0 flex-1 flex-col rounded-t-[36px] bg-white px-6 pb-10 pt-6 shadow-[0_-8px_30px_rgba(15,23,42,0.08)] sm:px-8"
           >
             <h1 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink">
               Welcome back
