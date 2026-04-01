@@ -47,6 +47,39 @@ export default async function YourDataPage() {
         </div>
       </div>
 
+      <section className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="overflow-hidden rounded-2xl shadow-soft">
+          <img
+            src="/assets/article-thyroid.png"
+            alt="Thyroid insight"
+            className="h-44 w-full object-cover"
+          />
+          <div className="bg-slate-950 p-4 text-white">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-slate-300">
+              Blood Panel
+            </p>
+            <p className="mt-1 text-base font-semibold">
+              Restore thyroid function to boost energy & metabolism
+            </p>
+          </div>
+        </div>
+        <div className="overflow-hidden rounded-2xl shadow-soft">
+          <img
+            src="/assets/article-insulin-sensitivity.png"
+            alt="Metabolic insight"
+            className="h-44 w-full object-cover"
+          />
+          <div className="bg-slate-950 p-4 text-white">
+            <p className="text-[11px] uppercase tracking-[0.12em] text-slate-300">
+              Metabolic Health
+            </p>
+            <p className="mt-1 text-base font-semibold">
+              Improve insulin sensitivity
+            </p>
+          </div>
+        </div>
+      </section>
+
       {error ? (
         <div className="rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-700">
           Failed to load biomarkers. Check Supabase schema/RLS setup.

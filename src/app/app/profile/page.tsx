@@ -3,6 +3,21 @@ import { createClient } from "@/lib/supabase/server";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 export default async function ProfilePage() {
+  const includedTestImages = [
+    { title: "Standard Blood Panel", image: "/assets/tests/sp_blood.png" },
+    { title: "Advanced Blood Panel", image: "/assets/tests/adv_blood.png" },
+    { title: "Custom Blood Panel", image: "/assets/tests/custom_blood.png" },
+    { title: "Gut Microbiome Analysis", image: "/assets/tests/microbiome.png" },
+    { title: "Environmental Toxins", image: "/assets/tests/toxins.png" },
+    { title: "Grail Multi Cancer Test", image: "/assets/tests/grail.png" },
+    { title: "Continuous Glucose Monitor", image: "/assets/tests/cgm.png" },
+    { title: "Full Body MRI", image: "/assets/tests/mri.png" },
+    { title: "VO2 Max Test", image: "/assets/tests/vo2.png" },
+    { title: "DEXA Scan", image: "/assets/tests/dexa.png" },
+    { title: "IV Drip", image: "/assets/tests/iv.png" },
+    { title: "Heart Calcium Scan", image: "/assets/tests/calcium.png" },
+  ];
+
   const supabase = await createClient();
   const {
     data: { user },
@@ -159,6 +174,20 @@ export default async function ProfilePage() {
       <section className="mt-5 rounded-[24px] border border-white/70 bg-card/95 p-5 shadow-soft">
         <h2 className="text-lg font-semibold tracking-tight text-ink">
           Included tests
+        </h2>
+        <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {includedTestImages.map((item) => (
+            <div key={item.title} className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+              <img src={item.image} alt={item.title} className="h-24 w-full object-cover" />
+              <p className="p-2 text-xs font-semibold text-ink">{item.title}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-5 rounded-[24px] border border-white/70 bg-card/95 p-5 shadow-soft">
+        <h2 className="text-lg font-semibold tracking-tight text-ink">
+          100+ biomarker list
         </h2>
         <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {tests.map((test) => (

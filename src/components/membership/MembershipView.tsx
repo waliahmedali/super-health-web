@@ -67,6 +67,14 @@ export default function MembershipView() {
           <p className="mt-1 text-sm text-muted">{suffix}</p>
         </div>
 
+        <div className="mt-5 overflow-hidden rounded-2xl border border-blue-100 bg-blue-50">
+          <img
+            src="/assets/membership-preview.png"
+            alt="Membership card preview"
+            className="h-44 w-full object-contain bg-[#0f3ea8]"
+          />
+        </div>
+
         <ul className="mt-6 space-y-3 text-sm text-ink">
           {[
             "100+ biomarkers annually in one collection",
