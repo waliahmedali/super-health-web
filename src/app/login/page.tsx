@@ -59,7 +59,7 @@ export default function LoginPage() {
       <div className="flex w-full flex-1 flex-col">
         <div className="relative h-[25vh] min-h-[150px] max-h-[220px] w-full shrink-0 overflow-hidden sm:h-[24vh] sm:max-h-[260px]">
           <img
-            src="/assets/login-hero.png"
+            src="/assets/login-hero.png?v=20260406-1"
             alt="Standard Therapeutics — Your baseline is your blueprint"
             className="h-full w-full object-cover object-left-top"
           />
