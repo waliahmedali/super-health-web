@@ -94,6 +94,12 @@ export default async function YourDataPage() {
             className="h-auto w-full object-cover"
           />
         </Link>
+        <Link
+          href="/app/membership"
+          className="mt-3 block rounded-[12px] bg-blue-600 px-4 py-3 text-center text-sm font-semibold text-white shadow-soft"
+        >
+          Join today
+        </Link>
       </section>
 
       {error ? (
