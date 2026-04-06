@@ -95,15 +95,6 @@ const fallbackRows: BiomarkerRow[] = [
     measured_at: "2024-05-04",
   },
   {
-    id: "top20_ldl_cholesterol_dup",
-    marker_name: "LDL Cholesterol",
-    marker_category: "Cardiovascular",
-    value_text: "94",
-    unit: "mg/dL",
-    status: "In range",
-    measured_at: "2024-05-04",
-  },
-  {
     id: "top20_cholesterol_hdl_ratio",
     marker_name: "Cholesterol/HDL Ratio",
     marker_category: "Cardiovascular",
@@ -119,15 +110,6 @@ const fallbackRows: BiomarkerRow[] = [
     value_text: "1.8",
     unit: null,
     status: "Optimal",
-    measured_at: "2024-05-04",
-  },
-  {
-    id: "top20_cholesterol_total",
-    marker_name: "Cholesterol, Total",
-    marker_category: "Cardiovascular",
-    value_text: "182",
-    unit: "mg/dL",
-    status: "In range",
     measured_at: "2024-05-04",
   },
   {
