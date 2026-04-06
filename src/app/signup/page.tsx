@@ -1,26 +1,31 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
-  const router = useRouter();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState<string | null>(null);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
-    setSuccess(null);
     setLoading(true);
     try {
       const supabase = createClient();
-      const signUpPromise = supabase.auth.signUp({ email: email.trim(), password });
+      const signUpPromise = supabase.auth.signUp({
+        email: email.trim(),
+        password,
+        options: {
+          data: {
+            full_name: name.trim(),
+          },
+        },
+      });
       const timeoutPromise = new Promise<never>((_, reject) => {
         setTimeout(() => reject(new Error("Sign-up timed out. Please try again.")), 15000);
       });
@@ -32,15 +37,12 @@ export default function SignupPage() {
 
       // If email confirmation is enabled, Supabase often returns no session here.
       if (!data.session) {
-        setSuccess("Account created. Please verify your email, then log in.");
-        router.push("/login");
-        router.refresh();
+        window.location.assign("/login");
         return;
       }
 
-      setSuccess("Account created. Redirecting to your app...");
-      router.push("/app");
-      router.refresh();
+      // Force full navigation so auth cookies/session are guaranteed fresh.
+      window.location.assign("/app");
     } catch (err) {
       setError(
         err instanceof Error
@@ -53,60 +55,76 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-md items-center px-6 py-10">
-      <form
-        onSubmit={onSubmit}
-        className="w-full rounded-[28px] border border-white/70 bg-card/95 p-8 shadow-soft backdrop-blur"
-      >
-        <img
-          src="/assets/logo.png"
-          alt="Standard Therapeutics"
-          className="mb-4 h-[77px] w-[77px] -ml-1 object-contain"
-        />
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-          Standard Therapeutics
-        </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-[-0.01em]">Create your account</h1>
-        <p className="mt-2 text-sm text-muted">
-          Create your Standard Therapeutics account.
-        </p>
+    <main className="flex min-h-[100dvh] flex-col bg-[#e8eaed]">
+      <div className="flex w-full flex-1 flex-col">
+        <div className="relative h-[25vh] min-h-[150px] max-h-[220px] w-full shrink-0 overflow-hidden sm:h-[24vh] sm:max-h-[260px]">
+          <img
+            src="/assets/login-hero.png?v=20260406-1"
+            alt="Standard Therapeutics — Your baseline is your blueprint"
+            className="h-full w-full object-cover object-left-top"
+          />
+        </div>
 
-        <label className="mt-6 block text-sm font-medium text-ink">Email</label>
-        <input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2"
-        />
+        <div className="relative z-10 -mt-9 flex min-h-0 flex-1 flex-col sm:-mt-10">
+          <form
+            onSubmit={onSubmit}
+            className="flex min-h-0 flex-1 flex-col rounded-t-[36px] bg-white px-6 pb-10 pt-6 shadow-[0_-8px_30px_rgba(15,23,42,0.08)] sm:px-8"
+          >
+            <h1 className="text-[26px] font-semibold leading-tight tracking-[-0.02em] text-ink">
+              Create your account
+            </h1>
 
-        <label className="mt-4 block text-sm font-medium text-ink">Password</label>
-        <input
-          type="password"
-          required
-          minLength={8}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mt-2 w-full rounded-xl border border-gray-200 bg-white px-3 py-2.5 text-sm outline-none ring-accent focus:ring-2"
-        />
+            <p className="mt-2 text-sm text-muted">
+              Already have an account?{" "}
+              <Link href="/login" className="font-medium text-accent">
+                Login
+              </Link>
+            </p>
 
-        {error ? <p className="mt-3 text-sm text-red-600">{error}</p> : null}
-        {success ? <p className="mt-3 text-sm text-green-700">{success}</p> : null}
+            <label className="mt-5 block text-xs font-medium text-muted">Name</label>
+            <input
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your name"
+              className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
+            />
 
-        <button
-          disabled={loading}
-          className="mt-6 w-full rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-white shadow-sm disabled:opacity-60"
-        >
-          {loading ? "Creating account..." : "Create account"}
-        </button>
+            <label className="mt-3 block text-xs font-medium text-muted">Email address</label>
+            <input
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              placeholder="Your email"
+              className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
+            />
 
-        <p className="mt-4 text-sm text-muted">
-          Already have an account?{" "}
-          <Link href="/login" className="font-medium text-accent">
-            Login
-          </Link>
-        </p>
-      </form>
+            <label className="mt-3 block text-xs font-medium text-muted">Password</label>
+            <input
+              type="password"
+              required
+              minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
+              placeholder="Your password"
+              className="mt-1.5 h-11 w-full rounded-xl border border-gray-200 bg-white px-3 text-[15px] outline-none ring-accent/40 focus:ring-2"
+            />
+
+            {error ? <p className="mt-2 text-sm text-red-600">{error}</p> : null}
+
+            <button
+              disabled={loading}
+              className="mt-5 h-11 w-full rounded-xl bg-[#05142c] text-[15px] font-semibold text-white disabled:opacity-60"
+            >
+              {loading ? "Creating account..." : "Continue"}
+            </button>
+          </form>
+        </div>
+      </div>
     </main>
   );
 }
