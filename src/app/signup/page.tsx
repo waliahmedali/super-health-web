@@ -55,10 +55,10 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-[#e8eaed]">
+    <main className="min-h-[100dvh] bg-[#f2f3f5]">
       <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-7 sm:px-8 sm:pt-9">
         <form onSubmit={onSubmit} className="w-full">
-          <h1 className="text-[50px] font-semibold leading-[0.95] tracking-[-0.03em] text-ink sm:text-[58px]">
+          <h1 className="text-[42px] font-semibold leading-[0.95] tracking-[-0.03em] text-ink sm:text-[48px]">
             Standard Therapeutics
           </h1>
 
@@ -66,7 +66,7 @@ export default function SignupPage() {
             Standard Therapeutics membership
           </p>
 
-          <h2 className="mt-4 text-[42px] font-semibold leading-[1.03] tracking-[-0.03em] text-ink sm:text-[46px]">
+          <h2 className="mt-4 text-[34px] font-semibold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[38px]">
             A health check like never before
           </h2>
           <p className="mt-2 text-[18px] leading-7 text-muted">
@@ -103,7 +103,7 @@ export default function SignupPage() {
                 className="h-10 w-10 rounded-lg border border-gray-200 bg-white object-contain p-1"
               />
               <div className="min-w-0">
-                <p className="text-[22px] font-semibold leading-tight text-ink">
+                <p className="text-[18px] font-semibold leading-tight text-ink sm:text-[20px]">
                   Standard Therapeutics Membership{" "}
                   <span className="whitespace-nowrap">$199/yr</span>
                 </p>
