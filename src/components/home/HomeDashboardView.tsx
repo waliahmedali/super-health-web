@@ -12,36 +12,6 @@ type Article = {
   image: string;
 };
 
-function ArcGauge({ value, label }: { value: number; label: string }) {
-  const radius = 42;
-  const circumference = Math.PI * radius;
-  const dash = (Math.max(0, Math.min(100, value)) / 100) * circumference;
-  return (
-    <div className="relative h-16 w-28">
-      <svg viewBox="0 0 120 70" className="h-full w-full">
-        <path
-          d="M 18 60 A 42 42 0 0 1 102 60"
-          fill="none"
-          stroke="rgba(255,255,255,0.28)"
-          strokeWidth="8"
-          strokeLinecap="round"
-        />
-        <path
-          d="M 18 60 A 42 42 0 0 1 102 60"
-          fill="none"
-          stroke="#ffffff"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={`${dash} ${circumference}`}
-        />
-      </svg>
-      <p className="absolute inset-x-0 bottom-0 text-center text-xs font-semibold text-white">
-        {label}
-      </p>
-    </div>
-  );
-}
-
 function Sparkline({ values }: { values: number[] }) {
   const points = useMemo(() => {
     const w = 84;
@@ -240,40 +210,30 @@ export default function HomeDashboardView({
         </div>
       </section>
 
-      <section className="mt-5 flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 sm:mt-6 sm:gap-3">
-        <div className="min-w-[272px] snap-start rounded-[20px] bg-blue-700 p-4 text-white shadow-soft">
-          <p className="text-sm font-semibold">Standard Therapeutics</p>
-          <p className="mt-1 text-xs text-blue-100">Your performance is decent. Stay on track.</p>
-          <div className="mt-2 flex justify-end">
-            <ArcGauge value={71} label="71 / 100" />
-          </div>
-        </div>
-        <div className="min-w-[272px] snap-start rounded-[20px] bg-emerald-800 p-4 text-white shadow-soft">
-          <p className="text-sm font-semibold">Physical Age</p>
-          <p className="mt-1 text-xs text-emerald-100">In relation to your current age.</p>
-          <div className="mt-2 flex justify-end">
-            <ArcGauge value={72} label="72%" />
-          </div>
-        </div>
-        <div className="min-w-[212px] snap-start rounded-[20px] bg-slate-950 p-4 text-white shadow-soft">
-          <p className="text-sm font-semibold">VO2 Max</p>
-          <p className="mt-3 text-3xl font-bold">45</p>
-          <p className="text-xs text-white/70">ml/kg/min</p>
-        </div>
-      </section>
-
-      <section className="mt-5 rounded-[24px] bg-slate-950 p-4 text-white shadow-soft sm:p-5">
-        <p className="text-sm font-semibold">Walking + Running Distance</p>
-        <p className="mt-1 text-xs text-slate-400">Linked to Apple Health on your iPhone.</p>
-        <div className="mt-4 flex items-center justify-between gap-3">
+      <section className="mt-4 rounded-[18px] border border-gray-100 bg-white p-4 shadow-soft sm:mt-5 sm:p-5">
+        <p className="text-[13px] font-semibold text-ink">Biomarkers</p>
+        <div className="mt-2 grid grid-cols-4 gap-2">
           <div>
-            <p className="text-xs text-slate-400">Average distance</p>
-            <p className="text-3xl font-bold text-orange-400">5.6 km</p>
+            <p className="text-[28px] font-semibold leading-none text-ink sm:text-[30px]">106</p>
+            <p className="mt-1 text-[11px] text-muted sm:text-xs">Total</p>
           </div>
-          <div className="rounded-full bg-orange-500 px-4 py-2 text-center">
-            <p className="text-base font-bold">7,280</p>
-            <p className="text-[11px] text-orange-50">steps today</p>
+          <div>
+            <p className="text-[28px] font-semibold leading-none text-ink sm:text-[30px]">80</p>
+            <p className="mt-1 text-[11px] text-muted sm:text-xs">Optimal</p>
           </div>
+          <div>
+            <p className="text-[28px] font-semibold leading-none text-ink sm:text-[30px]">21</p>
+            <p className="mt-1 text-[11px] text-muted sm:text-xs">In range</p>
+          </div>
+          <div>
+            <p className="text-[28px] font-semibold leading-none text-ink sm:text-[30px]">5</p>
+            <p className="mt-1 text-[11px] text-muted sm:text-xs">Out of range</p>
+          </div>
+        </div>
+        <div className="mt-3 flex h-1.5 w-full overflow-hidden rounded-full bg-gray-100">
+          <div className="h-full bg-slate-400" style={{ width: "75.5%" }} />
+          <div className="h-full bg-emerald-500" style={{ width: "19.8%" }} />
+          <div className="h-full bg-amber-400" style={{ width: "4.7%" }} />
         </div>
       </section>
 
