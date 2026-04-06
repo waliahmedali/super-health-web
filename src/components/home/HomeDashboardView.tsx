@@ -361,12 +361,14 @@ export default function HomeDashboardView() {
               onClick={() => setActiveArticle(a)}
               className="min-w-[248px] snap-start overflow-hidden rounded-[18px] bg-white text-left dark:bg-slate-950 sm:min-w-[260px]"
             >
-              <img
-                src={a.image}
-                alt={a.title}
-                className="block h-40 w-full -translate-y-5 scale-[1.1] object-cover object-top sm:h-44"
-                style={{ objectPosition: a.imagePosition ?? "center top" }}
-              />
+              <div className="h-40 overflow-hidden bg-black sm:h-44">
+                <img
+                  src={a.image}
+                  alt={a.title}
+                  className="block h-full w-full -translate-y-8 scale-[1.16] object-cover object-top"
+                  style={{ objectPosition: a.imagePosition ?? "center top" }}
+                />
+              </div>
               <p className="px-4 pt-3 text-sm font-semibold text-ink dark:text-white">{a.title}</p>
               <p className="px-4 pb-4 pt-2 text-xs text-muted dark:text-slate-300">{a.subtitle}</p>
             </button>
