@@ -168,8 +168,8 @@ export default function SignupPage() {
                 className="h-12 w-12 rounded-lg border border-gray-200 bg-white object-cover"
               />
               <div className="min-w-0">
-                <p className="text-[16px] font-semibold leading-tight text-ink sm:text-[18px]">
-                  Standard Therapeutics Membership{" "}
+                <p className="flex items-baseline justify-between gap-2 text-[16px] font-semibold leading-tight text-ink sm:text-[18px]">
+                  <span className="whitespace-nowrap">Standard Therapeutics Membership</span>
                   <span className="whitespace-nowrap">
                     {annualPriceLabel}
                     <span className="font-medium text-muted">/yr</span>
