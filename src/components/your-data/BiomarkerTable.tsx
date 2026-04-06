@@ -12,6 +12,63 @@ type BiomarkerRow = {
   measured_at: string | null;
 };
 
+const fallbackRows: BiomarkerRow[] = [
+  {
+    id: "ldl",
+    marker_name: "LDL Cholesterol",
+    marker_category: "Cardiovascular",
+    value_text: "90",
+    unit: "mg/dL",
+    status: "Optimal",
+    measured_at: "2024-05-04",
+  },
+  {
+    id: "total_cholesterol",
+    marker_name: "Total Cholesterol",
+    marker_category: "Cardiovascular",
+    value_text: "168",
+    unit: "mg/dL",
+    status: "Optimal",
+    measured_at: "2024-05-04",
+  },
+  {
+    id: "vitamin_d",
+    marker_name: "Vitamin D (25-OH)",
+    marker_category: "Micronutrients",
+    value_text: "28",
+    unit: "ng/mL",
+    status: "Out of range",
+    measured_at: "2024-05-04",
+  },
+  {
+    id: "ferritin",
+    marker_name: "Ferritin",
+    marker_category: "Iron",
+    value_text: "62",
+    unit: "ng/mL",
+    status: "In range",
+    measured_at: "2024-05-04",
+  },
+  {
+    id: "free_testosterone",
+    marker_name: "Free Testosterone",
+    marker_category: "Hormones",
+    value_text: "14.2",
+    unit: "ng/dL",
+    status: "In range",
+    measured_at: "2024-05-04",
+  },
+  {
+    id: "hrv",
+    marker_name: "Heart Rate Variability (HRV)",
+    marker_category: "Recovery",
+    value_text: "58",
+    unit: "ms",
+    status: "In range",
+    measured_at: "2024-05-04",
+  },
+];
+
 const statusStyles: Record<string, string> = {
   Optimal: "bg-[#022c22] text-[#00E0A1]",
   "In range": "bg-[#052e16] text-[#4ade80]",
@@ -21,25 +78,14 @@ const statusStyles: Record<string, string> = {
 
 export default function BiomarkerTable({ rows }: { rows: BiomarkerRow[] }) {
   const [activeTab, setActiveTab] = useState<"Summary" | "All markers">("Summary");
+  const displayRows = rows.length > 0 ? rows : fallbackRows;
   const counts = useMemo(() => {
-    const optimal = rows.filter((r) => r.status === "Optimal").length;
-    const inRange = rows.filter((r) => r.status === "In range").length;
-    const outOfRange = rows.filter((r) => r.status === "Out of range").length;
-    const pending = rows.filter((r) => !r.status || r.status === "Pending").length;
+    const optimal = displayRows.filter((r) => r.status === "Optimal").length;
+    const inRange = displayRows.filter((r) => r.status === "In range").length;
+    const outOfRange = displayRows.filter((r) => r.status === "Out of range").length;
+    const pending = displayRows.filter((r) => !r.status || r.status === "Pending").length;
     return { optimal, inRange, outOfRange, pending };
-  }, [rows]);
-
-  if (rows.length === 0) {
-    return (
-      <div className="rounded-2xl border border-white/70 bg-card/95 p-6 shadow-soft backdrop-blur">
-        <h2 className="text-lg font-semibold">Biomarkers</h2>
-        <p className="mt-2 text-sm text-muted">
-          No biomarker results yet. Add rows in Supabase table{" "}
-          <code>biomarker_results</code> for your account.
-        </p>
-      </div>
-    );
-  }
+  }, [displayRows]);
 
   return (
     <div>
@@ -65,7 +111,7 @@ export default function BiomarkerTable({ rows }: { rows: BiomarkerRow[] }) {
         <div className="mb-4 rounded-2xl bg-gray-50 p-4">
           <p className="text-base font-semibold text-ink">Blood Biomarkers</p>
           <p className="mt-1 text-sm text-muted">
-            {rows.length} markers · {counts.optimal} optimal · {counts.outOfRange} out of range
+            {displayRows.length} markers · {counts.optimal} optimal · {counts.outOfRange} out of range
           </p>
           <div className="mt-3 flex h-2 overflow-hidden rounded-full">
             <div className="bg-[#00E0A1]" style={{ flex: counts.optimal || 0.01 }} />
@@ -82,14 +128,18 @@ export default function BiomarkerTable({ rows }: { rows: BiomarkerRow[] }) {
         </div>
       ) : null}
 
-      <div className="grid grid-cols-[1.5fr_1fr_1fr] border-b border-gray-200 pb-2 text-xs text-muted">
+      <div className="grid grid-cols-[1.5fr_1fr_1fr_1fr] border-b border-gray-200 pb-2 text-xs text-muted">
         <p>Name</p>
         <p>Status</p>
         <p>Value</p>
+        <p>Trend</p>
       </div>
       <div>
-        {rows.map((row) => (
-          <div key={row.id} className="grid grid-cols-[1.5fr_1fr_1fr] items-center border-b border-gray-100 py-3">
+        {displayRows.map((row) => (
+          <div
+            key={row.id}
+            className="grid grid-cols-[1.5fr_1fr_1fr_1fr] items-center border-b border-gray-100 py-3"
+          >
             <div>
               <p className="text-sm font-semibold text-ink">{row.marker_name}</p>
               <p className="text-xs text-muted">{row.marker_category ?? "General"}</p>
@@ -107,11 +157,56 @@ export default function BiomarkerTable({ rows }: { rows: BiomarkerRow[] }) {
               {row.value_text}
               {row.unit ? ` ${row.unit}` : ""}
             </p>
+            <Sparkline values={trendFor(row.id)} />
           </div>
         ))}
       </div>
     </div>
   );
+}
+
+function Sparkline({ values }: { values: number[] }) {
+  const points = values
+    .map((v, i) => `${(i / (values.length - 1)) * 72},${22 - v * 22}`)
+    .join(" ");
+  return (
+    <svg width="72" height="22" viewBox="0 0 72 22" className="text-accent">
+      <polyline fill="none" stroke="currentColor" strokeWidth="1.8" points={points} />
+      {values.map((v, i) => {
+        const x = (i / (values.length - 1)) * 72;
+        const y = 22 - v * 22;
+        return (
+          <circle
+            key={`${x}-${y}`}
+            cx={x}
+            cy={y}
+            r={i === values.length - 1 ? 2.2 : 1.6}
+            fill="currentColor"
+            opacity={i === values.length - 1 ? 1 : 0.65}
+          />
+        );
+      })}
+    </svg>
+  );
+}
+
+function trendFor(id: string): number[] {
+  switch (id) {
+    case "ldl":
+      return [0.62, 0.58, 0.55, 0.52, 0.5];
+    case "vitamin_d":
+      return [0.32, 0.26, 0.22, 0.27, 0.33];
+    case "total_cholesterol":
+      return [0.55, 0.56, 0.54, 0.52, 0.53];
+    case "hrv":
+      return [0.42, 0.6, 0.48, 0.66, 0.56];
+    case "ferritin":
+      return [0.58, 0.5, 0.44, 0.5, 0.57];
+    case "free_testosterone":
+      return [0.46, 0.5, 0.43, 0.55, 0.6];
+    default:
+      return [0.4, 0.48, 0.44, 0.52, 0.5];
+  }
 }
 
 function LegendDot({ color, label }: { color: string; label: string }) {
