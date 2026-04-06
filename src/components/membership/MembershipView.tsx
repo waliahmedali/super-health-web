@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 
 type Plan = "monthly" | "annual";
 
@@ -26,6 +27,7 @@ const faqs = [
 export default function MembershipView() {
   const [plan, setPlan] = useState<Plan>("annual");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [membershipImageLoaded, setMembershipImageLoaded] = useState(false);
 
   const price = useMemo(() => (plan === "monthly" ? "$16" : "$199"), [plan]);
   const suffix = useMemo(() => (plan === "monthly" ? "/month" : "/year"), [plan]);
@@ -67,11 +69,22 @@ export default function MembershipView() {
           <p className="mt-1 text-sm text-muted">{suffix}</p>
         </div>
 
-        <div className="mt-5 overflow-hidden rounded-2xl border border-blue-100 bg-blue-50">
-          <img
+        <div className="relative mt-5 overflow-hidden rounded-2xl border border-gray-200 bg-gray-100">
+          {!membershipImageLoaded ? (
+            <div className="h-[220px] w-full animate-pulse bg-gray-200 sm:h-[250px]" />
+          ) : null}
+          <Image
             src="/assets/membership-preview.png"
             alt="Membership card preview"
-            className="h-[220px] w-full object-contain bg-[#0f3ea8] sm:h-[250px]"
+            width={1400}
+            height={900}
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 640px) 100vw, 640px"
+            onLoad={() => setMembershipImageLoaded(true)}
+            className={`h-[220px] w-full object-contain bg-white transition-opacity duration-300 sm:h-[250px] ${
+              membershipImageLoaded ? "opacity-100" : "opacity-0"
+            }`}
           />
         </div>
 
