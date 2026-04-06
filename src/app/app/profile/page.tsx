@@ -153,7 +153,7 @@ export default async function ProfilePage() {
       <section className="rounded-[28px] border border-white/70 bg-card/95 p-5 shadow-soft">
         <div className="flex items-center gap-4">
           <img
-            src="/assets/profile.png"
+            src="/assets/profile-user.png"
             alt="Profile"
             className="h-20 w-20 rounded-full object-cover"
           />
@@ -162,7 +162,7 @@ export default async function ProfilePage() {
               Profile
             </p>
             <h1 className="text-2xl font-semibold tracking-tight text-ink">
-              W. Ali
+              New User
             </h1>
             <p className="text-sm text-muted">
               {user?.email ?? "Guest preview"}
