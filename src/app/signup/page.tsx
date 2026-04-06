@@ -119,7 +119,7 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-[#f7f8fa]">
+    <main className="min-h-[100dvh] bg-[#fbfcfd]">
       <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-7 sm:px-8 sm:pt-9">
         <form onSubmit={onSubmit} className="w-full">
           <h1 className="text-[26px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[30px]">
@@ -146,17 +146,17 @@ export default function SignupPage() {
                 className="h-8 w-8 rounded-full border-2 border-white object-cover"
               />
               <img
-                src="/assets/profile.png"
+                src="/assets/member-face-2.png"
                 alt=""
                 className="h-8 w-8 rounded-full border-2 border-white object-cover"
               />
               <img
-                src="/assets/profile.png"
+                src="/assets/member-face-3.png"
                 alt=""
                 className="h-8 w-8 rounded-full border-2 border-white object-cover"
               />
             </div>
-            <span>Trusted by thousands of members.</span>
+            <span>Trusted by hundreds of members.</span>
           </div>
           <div className="mt-5 h-px w-full bg-gray-300/80" />
 
