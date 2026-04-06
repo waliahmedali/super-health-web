@@ -55,10 +55,10 @@ export default function SignupPage() {
   };
 
   return (
-    <main className="min-h-[100dvh] bg-[#f2f3f5]">
+    <main className="min-h-[100dvh] bg-[#f7f8fa]">
       <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-7 sm:px-8 sm:pt-9">
         <form onSubmit={onSubmit} className="w-full">
-          <h1 className="text-[42px] font-semibold leading-[0.95] tracking-[-0.03em] text-ink sm:text-[48px]">
+          <h1 className="text-[34px] font-semibold leading-[0.98] tracking-[-0.03em] text-ink sm:text-[40px]">
             Standard Therapeutics
           </h1>
 
@@ -66,7 +66,7 @@ export default function SignupPage() {
             Standard Therapeutics membership
           </p>
 
-          <h2 className="mt-4 text-[34px] font-semibold leading-[1.05] tracking-[-0.03em] text-ink sm:text-[38px]">
+          <h2 className="mt-4 text-[28px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[32px]">
             A health check like never before
           </h2>
           <p className="mt-2 text-[18px] leading-7 text-muted">
@@ -122,7 +122,11 @@ export default function SignupPage() {
             </Link>
           </p>
 
-          <label className="mt-6 block text-xs font-medium text-muted">Name</label>
+          <h3 className="mt-6 text-[24px] font-semibold tracking-[-0.02em] text-ink">
+            Create your account
+          </h3>
+
+          <label className="mt-4 block text-xs font-medium text-muted">Name</label>
           <input
             type="text"
             required
