@@ -65,11 +65,7 @@ function trendFor(name: string) {
   }
 }
 
-export default function HomeDashboardView({
-  userEmail,
-}: {
-  userEmail?: string;
-}) {
+export default function HomeDashboardView() {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [pendingTopTab, setPendingTopTab] = useState<"Data" | "Records" | null>(null);
   const router = useRouter();
