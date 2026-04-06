@@ -153,7 +153,7 @@ export default function HomeDashboardView({
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-5 pb-28 sm:px-6 sm:py-8 sm:pb-24">
       <header className="mb-5 pt-1 sm:mb-7">
-        <h1 className="text-[42px] font-semibold leading-[0.96] tracking-[-0.03em] text-ink sm:text-5xl">
+        <h1 className="text-[34px] font-semibold leading-[0.98] tracking-[-0.03em] text-ink sm:text-[42px]">
           Standard Therapeutics
         </h1>
         <div className="mt-3 flex items-center gap-6">
@@ -164,7 +164,7 @@ export default function HomeDashboardView({
                 key={tab}
                 type="button"
                 onClick={() => setActiveTopTab(tab)}
-                className={`border-b-2 pb-1.5 text-[38px] leading-none tracking-[-0.03em] transition ${
+                className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
                   isActive
                     ? "border-ink font-medium text-ink"
                     : "border-transparent font-normal text-muted hover:text-ink"
