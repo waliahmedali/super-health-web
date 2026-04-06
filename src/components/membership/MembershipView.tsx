@@ -82,7 +82,7 @@ export default function MembershipView() {
             fetchPriority="high"
             sizes="(max-width: 640px) 100vw, 640px"
             onLoad={() => setMembershipImageLoaded(true)}
-            className={`h-[220px] w-full object-contain bg-white transition-opacity duration-300 sm:h-[250px] ${
+            className={`h-[220px] w-full object-cover transition-opacity duration-300 sm:h-[250px] ${
               membershipImageLoaded ? "opacity-100" : "opacity-0"
             }`}
           />
