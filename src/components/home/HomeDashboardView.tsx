@@ -342,7 +342,7 @@ export default function HomeDashboardView() {
             <button
               key={a.title}
               onClick={() => setActiveArticle(a)}
-              className="min-w-[248px] snap-start overflow-hidden rounded-[18px] bg-white text-left shadow-soft dark:bg-slate-950 sm:min-w-[260px]"
+              className="min-w-[248px] snap-start overflow-hidden rounded-[18px] bg-white text-left dark:bg-slate-950 sm:min-w-[260px]"
             >
               <img src={a.image} alt={a.title} className="h-36 w-full object-cover" />
               <p className="px-4 pt-3 text-sm font-semibold text-ink dark:text-white">{a.title}</p>
