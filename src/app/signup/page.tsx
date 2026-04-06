@@ -1,8 +1,55 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+
+const currencyByRegion: Record<string, string> = {
+  US: "USD",
+  CA: "CAD",
+  GB: "GBP",
+  AU: "AUD",
+  NZ: "NZD",
+  IN: "INR",
+  AE: "AED",
+  SA: "SAR",
+  QA: "QAR",
+  KW: "KWD",
+  BH: "BHD",
+  OM: "OMR",
+  EU: "EUR",
+  DE: "EUR",
+  FR: "EUR",
+  ES: "EUR",
+  IT: "EUR",
+  NL: "EUR",
+  IE: "EUR",
+  PT: "EUR",
+  BE: "EUR",
+  AT: "EUR",
+  FI: "EUR",
+  DK: "DKK",
+  SE: "SEK",
+  NO: "NOK",
+  CH: "CHF",
+  JP: "JPY",
+  KR: "KRW",
+  SG: "SGD",
+  HK: "HKD",
+  CN: "CNY",
+  TH: "THB",
+  MY: "MYR",
+  ID: "IDR",
+  PH: "PHP",
+  VN: "VND",
+  BR: "BRL",
+  MX: "MXN",
+  ZA: "ZAR",
+  NG: "NGN",
+  EG: "EGP",
+  TR: "TRY",
+  IL: "ILS",
+};
 
 export default function SignupPage() {
   const [name, setName] = useState("");
@@ -10,6 +57,23 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [annualPriceLabel, setAnnualPriceLabel] = useState("$199/yr");
+
+  useEffect(() => {
+    const locale = Intl.DateTimeFormat().resolvedOptions().locale || "en-US";
+    const region = locale.split("-")[1]?.toUpperCase();
+    const currency = (region && currencyByRegion[region]) || "USD";
+    try {
+      const formatted = new Intl.NumberFormat(locale, {
+        style: "currency",
+        currency,
+        maximumFractionDigits: 0,
+      }).format(199);
+      setAnnualPriceLabel(`${formatted}/yr`);
+    } catch {
+      setAnnualPriceLabel("$199/yr");
+    }
+  }, []);
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,7 +122,7 @@ export default function SignupPage() {
     <main className="min-h-[100dvh] bg-[#f7f8fa]">
       <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-7 sm:px-8 sm:pt-9">
         <form onSubmit={onSubmit} className="w-full">
-          <h1 className="text-[30px] font-semibold leading-[1] tracking-[-0.03em] text-ink sm:text-[34px]">
+          <h1 className="text-[26px] font-semibold leading-[1.02] tracking-[-0.03em] text-ink sm:text-[30px]">
             Standard Therapeutics
           </h1>
 
@@ -66,10 +130,10 @@ export default function SignupPage() {
             Standard Therapeutics membership
           </p>
 
-          <h2 className="mt-4 text-[24px] font-semibold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[27px]">
+          <h2 className="mt-4 text-[21px] font-semibold leading-[1.12] tracking-[-0.02em] text-ink sm:text-[24px]">
             A health check like never before
           </h2>
-          <p className="mt-2 text-[18px] leading-7 text-muted">
+          <p className="mt-2 text-[16px] font-medium leading-6 text-muted">
             Sign up to test 100+ biomarkers yearly, visualize health records and get a
             personalized plan that actually works.
           </p>
@@ -94,6 +158,7 @@ export default function SignupPage() {
             </div>
             <span>Trusted by thousands of members.</span>
           </div>
+          <div className="mt-5 h-px w-full bg-gray-300/80" />
 
           <div className="mt-5 rounded-2xl border border-gray-200 bg-[#fafafa] p-3">
             <div className="flex items-start gap-3">
@@ -105,7 +170,7 @@ export default function SignupPage() {
               <div className="min-w-0">
                 <p className="text-[18px] font-semibold leading-tight text-ink sm:text-[20px]">
                   Standard Therapeutics Membership{" "}
-                  <span className="whitespace-nowrap">$199/yr</span>
+                  <span className="whitespace-nowrap">{annualPriceLabel}</span>
                 </p>
                 <p className="mt-1 text-sm leading-5 text-muted">
                   100+ biomarkers, results tracked over time, and 24/7 access to your
