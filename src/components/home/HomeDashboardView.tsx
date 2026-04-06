@@ -179,16 +179,15 @@ export default function HomeDashboardView({
 
       <section>
         <p className="mb-2 text-[13px] font-semibold text-muted sm:mb-3 sm:text-sm">Biomarker Dashboard</p>
-        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2 sm:gap-3">
-          <div className="rounded-[20px] bg-[#E46A2D] p-4 text-white shadow-soft sm:p-5">
-            <p className="text-sm text-white/80">Biological Age</p>
-            <p className="mt-1 text-4xl font-bold leading-none sm:text-5xl">23.6</p>
-            <p className="mt-2 text-[13px] text-white/85 sm:text-sm">2.4 years younger than your chronological age</p>
+        <div className="relative overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#07245f_0%,#0a4db4_48%,#2bd2ff_100%)] p-4 text-white shadow-soft sm:p-5">
+          <div className="pointer-events-none absolute inset-0 opacity-45">
+            <div className="absolute -right-12 -top-14 h-52 w-52 rounded-full bg-blue-200/30 blur-3xl" />
+            <div className="absolute left-20 top-10 h-24 w-44 rounded-full bg-sky-300/30 blur-2xl" />
           </div>
-          <div className="rounded-[20px] bg-[#14161C] p-4 text-white shadow-soft sm:p-5">
-            <p className="text-sm text-white/80">Blood Biomarkers</p>
-            <p className="mt-1 text-4xl font-bold leading-none sm:text-5xl">60</p>
-            <p className="mt-2 text-[13px] text-white/85 sm:text-sm">1 Pending · 3 Out of range</p>
+          <div className="relative z-10">
+            <p className="text-[13px] font-medium text-white/90 sm:text-sm">Biological age</p>
+            <p className="mt-1 text-[46px] font-semibold leading-none tracking-tight sm:text-[52px]">29.5</p>
+            <p className="mt-1 text-[14px] text-white/90 sm:text-[15px]">2.5 years younger</p>
           </div>
         </div>
       </section>
