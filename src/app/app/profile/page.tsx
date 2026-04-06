@@ -22,6 +22,12 @@ export default async function ProfilePage() {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  const metadata = (user?.user_metadata ?? {}) as Record<string, unknown>;
+  const rawName =
+    (typeof metadata.full_name === "string" && metadata.full_name.trim()) ||
+    (typeof metadata.name === "string" && metadata.name.trim()) ||
+    "";
+  const displayName = rawName || "New User";
 
   const tests = [
     "Non HDL Cholesterol",
@@ -162,7 +168,7 @@ export default async function ProfilePage() {
               Profile
             </p>
             <h1 className="text-2xl font-semibold tracking-tight text-ink">
-              New User
+              {displayName}
             </h1>
             <p className="text-sm text-muted">
               {user?.email ?? "Guest preview"}
