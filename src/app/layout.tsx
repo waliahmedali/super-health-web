@@ -3,11 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Standard Therapeutics",
-  description: "Your baseline is your blueprint.",
+  description:
+    "Your home to new health. Standard Therapeutics is your functional health partner. We are here for your preventative and personalised health.",
   metadataBase: new URL("https://app.standardthera.com"),
   openGraph: {
     title: "Standard Therapeutics",
-    description: "Your baseline is your blueprint.",
+    description:
+      "Your home to new health. Standard Therapeutics is your functional health partner. We are here for your preventative and personalised health.",
     url: "https://app.standardthera.com",
     siteName: "Standard Therapeutics",
     images: [
@@ -23,7 +25,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Standard Therapeutics",
-    description: "Your baseline is your blueprint.",
+    description:
+      "Your home to new health. Standard Therapeutics is your functional health partner. We are here for your preventative and personalised health.",
     images: ["/assets/social-share.png"],
   },
 };
