@@ -384,8 +384,9 @@ export default function HomeDashboardView() {
               {activeArticle.title}
             </p>
             <button
-              onClick={() => setActiveArticle(null)}
-              className="absolute right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-ink dark:bg-slate-800 dark:text-white"
+              type="button"
+              onPointerDown={() => setActiveArticle(null)}
+              className="absolute right-4 inline-flex h-10 w-10 touch-manipulation items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-ink transition-transform duration-75 active:scale-95 dark:bg-slate-800 dark:text-white"
               aria-label="Close article"
             >
               ×
