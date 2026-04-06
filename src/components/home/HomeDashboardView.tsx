@@ -100,6 +100,7 @@ export default function HomeDashboardView({
   userEmail?: string;
 }) {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
+  const [activeTopTab, setActiveTopTab] = useState<"Data" | "Records">("Data");
 
   useEffect(() => {
     if (!activeArticle) return;
@@ -151,20 +152,29 @@ export default function HomeDashboardView({
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-5 pb-28 sm:px-6 sm:py-8 sm:pb-24">
-      <header className="relative mb-5 rounded-[28px] border border-white/70 bg-card/95 p-4 shadow-soft backdrop-blur sm:mb-7 sm:p-5">
-        <img
-          src="/assets/logo.png"
-          alt="Standard Therapeutics"
-          className="mb-2 h-11 w-11 object-contain sm:mb-3 sm:h-12 sm:w-12"
-        />
-        <h1 className="text-[30px] font-bold tracking-tight text-ink sm:text-4xl">Standard Therapeutics</h1>
-        <p className="mt-1 text-[13px] text-muted sm:text-sm">Your home to functional health</p>
-        <p className="mt-2 text-[13px] text-muted sm:text-sm">
-          {userEmail
-            ? `Welcome back, ${userEmail}.`
-            : "Guest preview mode is active. Explore the app-style experience in your browser."}
-        </p>
-
+      <header className="mb-5 pt-1 sm:mb-7">
+        <h1 className="text-[42px] font-semibold leading-[0.96] tracking-[-0.03em] text-ink sm:text-5xl">
+          Standard Therapeutics
+        </h1>
+        <div className="mt-3 flex items-center gap-6">
+          {(["Data", "Records"] as const).map((tab) => {
+            const isActive = activeTopTab === tab;
+            return (
+              <button
+                key={tab}
+                type="button"
+                onClick={() => setActiveTopTab(tab)}
+                className={`border-b-2 pb-1.5 text-[38px] leading-none tracking-[-0.03em] transition ${
+                  isActive
+                    ? "border-ink font-medium text-ink"
+                    : "border-transparent font-normal text-muted hover:text-ink"
+                }`}
+              >
+                {tab}
+              </button>
+            );
+          })}
+        </div>
       </header>
 
       <section>
