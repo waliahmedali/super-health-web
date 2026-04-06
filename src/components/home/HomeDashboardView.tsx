@@ -231,9 +231,9 @@ export default function HomeDashboardView({
           </div>
         </div>
         <div className="mt-3 flex h-1.5 w-full overflow-hidden rounded-full bg-gray-100">
-          <div className="h-full bg-slate-400" style={{ width: "75.5%" }} />
-          <div className="h-full bg-emerald-500" style={{ width: "19.8%" }} />
-          <div className="h-full bg-amber-400" style={{ width: "4.7%" }} />
+          <div className="h-full bg-emerald-500" style={{ width: "75.5%" }} />
+          <div className="h-full bg-yellow-400" style={{ width: "19.8%" }} />
+          <div className="h-full bg-orange-500" style={{ width: "4.7%" }} />
         </div>
       </section>
 
