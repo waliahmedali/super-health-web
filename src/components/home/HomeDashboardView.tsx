@@ -342,7 +342,7 @@ export default function HomeDashboardView() {
             <button
               key={a.title}
               onClick={() => setActiveArticle(a)}
-              className="min-w-[248px] snap-start overflow-hidden rounded-[18px] border border-gray-200 bg-white text-left shadow-soft dark:border-slate-800 dark:bg-slate-950 sm:min-w-[260px]"
+              className="min-w-[248px] snap-start overflow-hidden rounded-[18px] bg-white text-left shadow-soft dark:bg-slate-950 sm:min-w-[260px]"
             >
               <img src={a.image} alt={a.title} className="h-36 w-full object-cover" />
               <p className="px-4 pt-3 text-sm font-semibold text-ink dark:text-white">{a.title}</p>
@@ -381,9 +381,9 @@ export default function HomeDashboardView() {
         <div className="fixed inset-0 z-[70] min-h-screen overflow-y-auto bg-white dark:bg-[#020617]">
           <button
             onClick={() => setActiveArticle(null)}
-            className="absolute right-4 top-4 rounded-full bg-black/10 px-3 py-1 text-xl text-black dark:bg-white/10 dark:text-white"
+            className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-[#0A84FF] shadow-sm backdrop-blur dark:bg-slate-900/70"
           >
-            ✕
+            Done
           </button>
           <img src={activeArticle.image} alt={activeArticle.title} className="h-72 w-full object-cover" />
           <div className="p-5">
