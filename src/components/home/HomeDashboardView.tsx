@@ -179,6 +179,30 @@ export default function HomeDashboardView({
 
       <section>
         <p className="mb-2 text-[13px] font-semibold text-muted sm:mb-3 sm:text-sm">Biomarker Dashboard</p>
+        <div className="mb-2.5 flex items-center gap-4 overflow-x-auto pb-1 text-[13px] text-muted sm:mb-3">
+          <button type="button" className="inline-flex shrink-0 items-center gap-1.5 text-ink">
+            <span className="h-1.5 w-1.5 rounded-full bg-gray-300" />
+            <span className="whitespace-nowrap font-medium">Summary</span>
+          </button>
+          <button
+            type="button"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-muted"
+          >
+            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-300 text-[10px] text-emerald-600">
+              ✓
+            </span>
+            <span>Liver Health</span>
+          </button>
+          <button
+            type="button"
+            className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-muted"
+          >
+            <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-emerald-300 text-[10px] text-emerald-600">
+              ✓
+            </span>
+            <span>Kidney Health</span>
+          </button>
+        </div>
         <div className="relative overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#07245f_0%,#0a4db4_48%,#2bd2ff_100%)] p-4 text-white shadow-soft sm:p-5">
           <div className="pointer-events-none absolute inset-0 opacity-45">
             <div className="absolute -right-12 -top-14 h-52 w-52 rounded-full bg-blue-200/30 blur-3xl" />
