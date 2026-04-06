@@ -113,7 +113,7 @@ export default function HomeDashboardView({
     if (!pendingTopTab) return;
     const timer = window.setTimeout(() => {
       router.push(pendingTopTab === "Records" ? "/app/your-data" : "/app");
-    }, 130);
+    }, 100);
     return () => window.clearTimeout(timer);
   }, [pendingTopTab, router]);
 
