@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 type Article = {
@@ -100,7 +101,10 @@ export default function HomeDashboardView({
   userEmail?: string;
 }) {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
-  const [activeTopTab, setActiveTopTab] = useState<"Data" | "Records">("Data");
+  const pathname = usePathname();
+  const activeTopTab: "Data" | "Records" = pathname?.startsWith("/app/your-data")
+    ? "Records"
+    : "Data";
 
   useEffect(() => {
     if (!activeArticle) return;
@@ -157,23 +161,26 @@ export default function HomeDashboardView({
           Standard Therapeutics
         </h1>
         <div className="mt-3 flex items-center gap-6">
-          {(["Data", "Records"] as const).map((tab) => {
-            const isActive = activeTopTab === tab;
-            return (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveTopTab(tab)}
-                className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
-                  isActive
-                    ? "border-ink font-medium text-ink"
-                    : "border-transparent font-normal text-muted hover:text-ink"
-                }`}
-              >
-                {tab}
-              </button>
-            );
-          })}
+          <Link
+            href="/app"
+            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
+              activeTopTab === "Data"
+                ? "border-ink font-medium text-ink"
+                : "border-transparent font-normal text-muted hover:text-ink"
+            }`}
+          >
+            Data
+          </Link>
+          <Link
+            href="/app/your-data"
+            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
+              activeTopTab === "Records"
+                ? "border-ink font-medium text-ink"
+                : "border-transparent font-normal text-muted hover:text-ink"
+            }`}
+          >
+            Records
+          </Link>
         </div>
       </header>
 
