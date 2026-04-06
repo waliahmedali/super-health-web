@@ -10,6 +10,7 @@ type Article = {
   subtitle: string;
   body: string;
   image: string;
+  imagePosition?: string;
 };
 
 function Sparkline({ values }: { values: number[] }) {
@@ -102,36 +103,42 @@ export default function HomeDashboardView() {
       subtitle: "Exploring the new mind-eye connection and how it impacts rest.",
       body: "There is growing evidence that darkness cues in the eyes help synchronize your circadian rhythm and recovery.",
       image: "/assets/article-sleep-mask.png",
+      imagePosition: "center 28%",
     },
     {
       title: "The Semiotics of Heartburn",
       subtitle: "Why coffee and low pH can change how your esophagus feels.",
       body: "Heartburn is a signal, not just a symptom. This article explores reflux patterns and triggers.",
       image: "/assets/article-heartburn.png",
+      imagePosition: "center 38%",
     },
     {
       title: "The Anti Inflammatory Diet",
       subtitle: "Evidence-based eating to prevent and reduce inflammation.",
       body: "A practical framework for anti-inflammatory nutrition with whole-food swaps you can sustain.",
       image: "/assets/article-anti-inflammatory.png",
+      imagePosition: "center 38%",
     },
     {
       title: "Integrative Medicine: An Approach of The Future",
       subtitle: "Why tomorrow's integrative medicine will just be called good medicine.",
       body: "The future of care combines rigorous diagnostics with lifestyle and behavior medicine.",
       image: "/assets/article-integrative-medicine.png",
+      imagePosition: "center 36%",
     },
     {
       title: "Peptide Power",
       subtitle: "Peptides are exploding in popularity - but are they safe and effective?",
       body: "A primer on what the evidence says and where caution is still needed.",
       image: "/assets/article-peptide-power.png",
+      imagePosition: "center 38%",
     },
     {
       title: "Coenzyme Q10",
       subtitle: "A closer look at this powerhouse quinone and where it shows up.",
       body: "CoQ10 supports mitochondrial energy production and oxidative balance.",
       image: "/assets/article-coenzyme-q10.png",
+      imagePosition: "center 34%",
     },
   ];
 
@@ -347,7 +354,8 @@ export default function HomeDashboardView() {
               <img
                 src={a.image}
                 alt={a.title}
-                className="block h-40 w-full object-cover object-[center_32%] sm:h-44"
+                className="block h-40 w-full object-cover sm:h-44"
+                style={{ objectPosition: a.imagePosition ?? "center 34%" }}
               />
               <p className="px-4 pt-3 text-sm font-semibold text-ink dark:text-white">{a.title}</p>
               <p className="px-4 pb-4 pt-2 text-xs text-muted dark:text-slate-300">{a.subtitle}</p>
