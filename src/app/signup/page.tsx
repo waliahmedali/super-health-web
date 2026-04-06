@@ -58,7 +58,7 @@ export default function SignupPage() {
     <main className="min-h-[100dvh] bg-[#f7f8fa]">
       <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-7 sm:px-8 sm:pt-9">
         <form onSubmit={onSubmit} className="w-full">
-          <h1 className="text-[34px] font-semibold leading-[0.98] tracking-[-0.03em] text-ink sm:text-[40px]">
+          <h1 className="text-[30px] font-semibold leading-[1] tracking-[-0.03em] text-ink sm:text-[34px]">
             Standard Therapeutics
           </h1>
 
@@ -66,7 +66,7 @@ export default function SignupPage() {
             Standard Therapeutics membership
           </p>
 
-          <h2 className="mt-4 text-[28px] font-semibold leading-[1.08] tracking-[-0.02em] text-ink sm:text-[32px]">
+          <h2 className="mt-4 text-[24px] font-semibold leading-[1.1] tracking-[-0.02em] text-ink sm:text-[27px]">
             A health check like never before
           </h2>
           <p className="mt-2 text-[18px] leading-7 text-muted">
@@ -98,9 +98,9 @@ export default function SignupPage() {
           <div className="mt-5 rounded-2xl border border-gray-200 bg-[#fafafa] p-3">
             <div className="flex items-start gap-3">
               <img
-                src="/assets/upload-lab-icon.png"
+                src="/assets/signup-vial.png"
                 alt=""
-                className="h-10 w-10 rounded-lg border border-gray-200 bg-white object-contain p-1"
+                className="h-12 w-12 rounded-lg border border-gray-200 bg-white object-cover"
               />
               <div className="min-w-0">
                 <p className="text-[18px] font-semibold leading-tight text-ink sm:text-[20px]">
