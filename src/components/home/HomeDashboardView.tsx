@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
 
 type Article = {
@@ -101,10 +101,25 @@ export default function HomeDashboardView({
   userEmail?: string;
 }) {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
+  const [pendingTopTab, setPendingTopTab] = useState<"Data" | "Records" | null>(null);
+  const router = useRouter();
   const pathname = usePathname();
-  const activeTopTab: "Data" | "Records" = pathname?.startsWith("/app/your-data")
+  const routeTopTab: "Data" | "Records" = pathname?.startsWith("/app/your-data")
     ? "Records"
     : "Data";
+  const activeTopTab = pendingTopTab ?? routeTopTab;
+
+  useEffect(() => {
+    if (!pendingTopTab) return;
+    const timer = window.setTimeout(() => {
+      router.push(pendingTopTab === "Records" ? "/app/your-data" : "/app");
+    }, 130);
+    return () => window.clearTimeout(timer);
+  }, [pendingTopTab, router]);
+
+  useEffect(() => {
+    setPendingTopTab(null);
+  }, [pathname]);
 
   useEffect(() => {
     if (!activeArticle) return;
@@ -161,26 +176,28 @@ export default function HomeDashboardView({
           Standard Therapeutics
         </h1>
         <div className="mt-3 flex items-center gap-6">
-          <Link
-            href="/app"
-            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
+          <button
+            type="button"
+            onClick={() => setPendingTopTab("Data")}
+            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition-all duration-150 sm:text-[34px] ${
               activeTopTab === "Data"
                 ? "border-ink font-medium text-ink"
                 : "border-transparent font-normal text-muted hover:text-ink"
             }`}
           >
             Data
-          </Link>
-          <Link
-            href="/app/your-data"
-            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition sm:text-[34px] ${
+          </button>
+          <button
+            type="button"
+            onClick={() => setPendingTopTab("Records")}
+            className={`border-b-2 pb-1.5 text-[30px] leading-none tracking-[-0.03em] transition-all duration-150 sm:text-[34px] ${
               activeTopTab === "Records"
                 ? "border-ink font-medium text-ink"
                 : "border-transparent font-normal text-muted hover:text-ink"
             }`}
           >
             Records
-          </Link>
+          </button>
         </div>
       </header>
 
