@@ -379,12 +379,18 @@ export default function HomeDashboardView() {
 
       {activeArticle ? (
         <div className="fixed inset-0 z-[70] min-h-screen overflow-y-auto bg-white dark:bg-[#020617]">
-          <button
-            onClick={() => setActiveArticle(null)}
-            className="absolute right-4 top-4 z-10 rounded-full bg-white/90 px-3 py-1.5 text-sm font-semibold text-[#0A84FF] shadow-sm backdrop-blur dark:bg-slate-900/70"
-          >
-            Done
-          </button>
+          <div className="sticky top-0 z-10 flex items-center justify-center border-b border-gray-200 bg-white/95 px-4 py-3 backdrop-blur dark:border-slate-800 dark:bg-[#020617]/95">
+            <p className="max-w-[78%] truncate text-[15px] font-semibold text-ink dark:text-white">
+              {activeArticle.title}
+            </p>
+            <button
+              onClick={() => setActiveArticle(null)}
+              className="absolute right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-ink dark:bg-slate-800 dark:text-white"
+              aria-label="Close article"
+            >
+              ×
+            </button>
+          </div>
           <img src={activeArticle.image} alt={activeArticle.title} className="h-72 w-full object-cover" />
           <div className="p-5">
             <h3 className="text-3xl font-extrabold text-ink dark:text-white">{activeArticle.title}</h3>
