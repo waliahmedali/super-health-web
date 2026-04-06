@@ -57,7 +57,7 @@ export default function SignupPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [annualPriceLabel, setAnnualPriceLabel] = useState("$199/yr");
+  const [annualPriceLabel, setAnnualPriceLabel] = useState("$199");
 
   useEffect(() => {
     const locale = Intl.DateTimeFormat().resolvedOptions().locale || "en-US";
@@ -69,9 +69,9 @@ export default function SignupPage() {
         currency,
         maximumFractionDigits: 0,
       }).format(199);
-      setAnnualPriceLabel(`${formatted}/yr`);
+      setAnnualPriceLabel(formatted);
     } catch {
-      setAnnualPriceLabel("$199/yr");
+      setAnnualPriceLabel("$199");
     }
   }, []);
 
@@ -170,7 +170,10 @@ export default function SignupPage() {
               <div className="min-w-0">
                 <p className="text-[16px] font-semibold leading-tight text-ink sm:text-[18px]">
                   Standard Therapeutics Membership{" "}
-                  <span className="whitespace-nowrap">{annualPriceLabel}</span>
+                  <span className="whitespace-nowrap">
+                    {annualPriceLabel}
+                    <span className="font-medium text-muted">/yr</span>
+                  </span>
                 </p>
                 <p className="mt-1 text-sm leading-5 text-muted">
                   100+ biomarkers, results tracked over time, and 24/7 access to your
