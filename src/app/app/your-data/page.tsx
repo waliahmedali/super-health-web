@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import BiomarkerTable from "@/components/your-data/BiomarkerTable";
 import AppBottomNav from "@/components/navigation/AppBottomNav";
@@ -80,6 +81,19 @@ export default async function YourDataPage() {
             </p>
           </div>
         </div>
+      </section>
+
+      <section className="mb-5">
+        <Link
+          href="/app/membership"
+          className="block overflow-hidden rounded-2xl shadow-soft transition active:scale-[0.99]"
+        >
+          <img
+            src="/assets/your-data-membership-cta.png"
+            alt="Join membership"
+            className="h-auto w-full object-cover"
+          />
+        </Link>
       </section>
 
       {error ? (
