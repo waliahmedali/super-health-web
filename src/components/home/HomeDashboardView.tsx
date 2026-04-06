@@ -69,6 +69,7 @@ function trendFor(name: string) {
 export default function HomeDashboardView() {
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
   const [pendingTopTab, setPendingTopTab] = useState<"Data" | "Records" | null>(null);
+  const [isClosingArticle, setIsClosingArticle] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
   const routeTopTab: "Data" | "Records" = pathname?.startsWith("/app/your-data")
@@ -96,6 +97,15 @@ export default function HomeDashboardView() {
       document.body.style.overflow = original;
     };
   }, [activeArticle]);
+
+  const closeArticle = () => {
+    if (!activeArticle || isClosingArticle) return;
+    setIsClosingArticle(true);
+    window.setTimeout(() => {
+      setActiveArticle(null);
+      setIsClosingArticle(false);
+    }, 140);
+  };
 
   const articles: Article[] = [
     {
@@ -397,7 +407,7 @@ export default function HomeDashboardView() {
             </p>
             <button
               type="button"
-              onPointerDown={() => setActiveArticle(null)}
+              onClick={closeArticle}
               className="absolute right-4 inline-flex h-10 w-10 touch-manipulation items-center justify-center rounded-full bg-gray-100 text-2xl leading-none text-ink transition-transform duration-75 active:scale-95 dark:bg-slate-800 dark:text-white"
               aria-label="Close article"
             >
