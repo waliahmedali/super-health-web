@@ -52,6 +52,7 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
 
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const onUpload = async (file: File) => {
     if (!supabase) {
@@ -103,6 +104,43 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
     }
   };
 
+  const onDelete = async (row: UploadRow) => {
+    if (!supabase) {
+      setError("App configuration is not ready. Please refresh.");
+      return;
+    }
+    setError(null);
+    setDeletingId(row.id);
+    try {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user) {
+        setError("Please log in again.");
+        return;
+      }
+
+      // Remove the storage file first to avoid orphaned blobs.
+      const { error: storageError } = await supabase.storage
+        .from("test-results")
+        .remove([row.file_path]);
+      if (storageError) throw storageError;
+
+      const { error: dbError } = await supabase
+        .from("upload_records")
+        .delete()
+        .eq("id", row.id)
+        .eq("user_id", user.id);
+      if (dbError) throw dbError;
+
+      setRows((prev) => prev.filter((r) => r.id !== row.id));
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Unable to delete file.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <section className="space-y-6">
       <div className="rounded-2xl border border-white/70 bg-card/95 p-6 shadow-soft backdrop-blur">
@@ -139,11 +177,23 @@ export default function UploadCenter({ initialRows }: { initialRows: UploadRow[]
           <ul className="divide-y divide-gray-100">
             {rows.map((row) => (
               <li key={row.id} className="px-5 py-4">
-                <p className="text-sm font-semibold">{row.file_name}</p>
-                <p className="mt-1 text-xs text-muted">
-                  {row.mime_type ?? "unknown"} · {fmtBytes(row.size_bytes)} ·{" "}
-                  {new Date(row.uploaded_at).toLocaleString()}
-                </p>
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold">{row.file_name}</p>
+                    <p className="mt-1 text-xs text-muted">
+                      {row.mime_type ?? "unknown"} · {fmtBytes(row.size_bytes)} ·{" "}
+                      {new Date(row.uploaded_at).toLocaleString()}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => void onDelete(row)}
+                    disabled={deletingId === row.id}
+                    className="rounded-lg border border-rose-200 px-2.5 py-1 text-xs font-semibold text-rose-700 transition hover:bg-rose-50 disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {deletingId === row.id ? "Deleting..." : "Delete"}
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
