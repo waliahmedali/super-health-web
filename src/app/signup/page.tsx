@@ -74,14 +74,67 @@ export default function SignupPage() {
               Create your account
             </h1>
 
-            <p className="mt-2 text-sm text-muted">
+            <p className="mt-3 inline-flex w-fit rounded-lg bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-700">
+              Standard Therapeutics membership
+            </p>
+
+            <h2 className="mt-4 text-[38px] font-semibold leading-[1.03] tracking-[-0.03em] text-ink">
+              A health check like never before
+            </h2>
+            <p className="mt-2 text-[18px] leading-7 text-muted">
+              Sign up to test 100+ biomarkers yearly, visualize health records and get a
+              personalized plan that actually works.
+            </p>
+
+            <div className="mt-4 flex items-center gap-3 text-sm text-muted">
+              <div className="flex -space-x-2">
+                <img
+                  src="/assets/profile.png"
+                  alt=""
+                  className="h-8 w-8 rounded-full border-2 border-white object-cover"
+                />
+                <img
+                  src="/assets/profile.png"
+                  alt=""
+                  className="h-8 w-8 rounded-full border-2 border-white object-cover"
+                />
+                <img
+                  src="/assets/profile.png"
+                  alt=""
+                  className="h-8 w-8 rounded-full border-2 border-white object-cover"
+                />
+              </div>
+              <span>Trusted by thousands of members.</span>
+            </div>
+
+            <div className="mt-5 rounded-2xl border border-gray-200 bg-[#fafafa] p-3">
+              <div className="flex items-start gap-3">
+                <img
+                  src="/assets/upload-lab-icon.png"
+                  alt=""
+                  className="h-10 w-10 rounded-lg border border-gray-200 bg-white object-contain p-1"
+                />
+                <div className="min-w-0">
+                  <p className="text-[22px] font-semibold leading-tight text-ink">
+                    Standard Therapeutics Membership{" "}
+                    <span className="whitespace-nowrap">$199/yr</span>
+                  </p>
+                  <p className="mt-1 text-sm leading-5 text-muted">
+                    100+ biomarkers, results tracked over time, and 24/7 access to your
+                    care team.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-4 text-sm text-muted">
               Already have an account?{" "}
               <Link href="/login" className="font-medium text-accent">
                 Login
               </Link>
             </p>
 
-            <label className="mt-5 block text-xs font-medium text-muted">Name</label>
+            <label className="mt-6 block text-xs font-medium text-muted">Name</label>
             <input
               type="text"
               required
